@@ -2,7 +2,7 @@
 
 import { Raleway } from 'next/font/google';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import '../../app/globals.css';
 import PageTemplate from './pageTemplate';
@@ -15,6 +15,13 @@ interface Props {
 // export default function DemoTemplate() {
 export default function DemoTemplate({ children, demo }: Props) {
   const [infoBoxShowing, setInfoBoxShowing] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!isMobile && buttonRef.current) {
+      buttonRef.current.click();
+    }
+  }, []);
 
   return (
     <div className="flex flex-row max-h-[100dvh] @container">
@@ -33,7 +40,11 @@ export default function DemoTemplate({ children, demo }: Props) {
 
       <div
         className={`shrink-0 flex flex-col transition-all duration-300 ${
-          infoBoxShowing ? (isMobile ? 'w-full' : 'w-1/4') : 'w-0'
+          infoBoxShowing
+            ? isMobile
+              ? 'w-full'
+              : 'min-w-[32rem] w-1/4'
+            : 'min-w-0 w-0'
         } overflow-x-visible overflow-y-scroll relative`}
       >
         <PageTemplate>{children}</PageTemplate>
@@ -43,10 +54,13 @@ export default function DemoTemplate({ children, demo }: Props) {
         className={`absolute transition-all duration-300 ${
           infoBoxShowing
             ? `${
-                isMobile ? 'left-0' : 'right-1/4 translate-x-[calc(100%-1px)]'
+                isMobile
+                  ? 'left-0'
+                  : 'right-[max(25%,32rem)] translate-x-[calc(100%-1px)]'
               }`
             : 'right-0'
         } top-1/2 -translate-y-1/2`}
+        ref={buttonRef}
       >
         {infoBoxShowing && (
           <Image src="/tabs/tab-right.svg" alt="" width={25} height={0} />

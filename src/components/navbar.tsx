@@ -48,7 +48,7 @@ export default function Navbar({ highlightWriting, highlightAbout }: Props) {
       >
         <div className="@xl:hidden flex flex-col items-center justify-center py-8 gap-12 bg-black uppercase tracking-widest">
           <button
-            className={`absolute left-2 top-5 hamburger hamburger--collapse ${
+            className={`absolute left-0 top-6 hamburger hamburger--collapse ${
               menuOpen ? 'is-active' : ''
             }`}
             type="button"
