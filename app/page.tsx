@@ -2,6 +2,8 @@
 
 import Navbar from '@/src/components/navbar';
 import { Raleway } from 'next/font/google';
+import Link from 'next/link';
+import './globals.css';
 
 const ralewayHeavy = Raleway({ subsets: ['latin'], weight: '800' });
 const raleway = Raleway({ subsets: ['latin'], weight: '500' });
@@ -42,7 +44,9 @@ export default function Home() {
             me to take my understanding of advanced math and turn it into real,
             tangible software -- check out my projects to see.
           </p>
-          <p className={`${raleway.className} text-md`}>View my resume here.</p>
+          <p className={`${raleway.className} text-md`}>
+            View my resume <Link href="/resume.pdf">here</Link>.
+          </p>
           <h1
             className={`${ralewayHeavy.className} text-5xl text-center uppercase`}
           >

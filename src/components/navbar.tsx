@@ -3,7 +3,12 @@ import 'tailwindcss/tailwind.css';
 
 const ubuntu = Ubuntu({ subsets: ['latin'], weight: '400' });
 
-export default function Navbar() {
+interface Props {
+  highlightWriting?: boolean;
+  highlightAbout?: boolean;
+}
+
+export default function Navbar({ highlightWriting, highlightAbout }: Props) {
   const home = (
     <a href="/" className="text-white text-3xl">
       Ethan Lipson
@@ -12,7 +17,9 @@ export default function Navbar() {
   const writing = (
     <a
       href="/writing"
-      className="text-[#b4b4b4] transition hover:text-white text-xl"
+      className={`${
+        highlightWriting ? 'text-white' : 'text-[#b4b4b4]'
+      } transition hover:text-white text-xl`}
     >
       Writing
     </a>
@@ -20,7 +27,9 @@ export default function Navbar() {
   const about = (
     <a
       href="/about"
-      className="text-[#b4b4b4] transition hover:text-white text-xl"
+      className={`${
+        highlightAbout ? 'text-white' : 'text-[#b4b4b4]'
+      }  transition hover:text-white text-xl`}
     >
       About
     </a>
