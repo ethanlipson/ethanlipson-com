@@ -1,0 +1,10 @@
+.fluid {
+  text-align: center;
+  user-select: none;
+  background-color: white;
+}
+
+.fluid canvas {
+  touch-action: none;
+  display: block;
+}

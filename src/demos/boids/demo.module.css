@@ -1,0 +1,28 @@
+.canvas {
+  display: block;
+  touch-action: none;
+  position: relative;
+}
+
+.options {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  width: 15rem;
+  height: 20rem;
+  opacity: 0.5;
+  background-color: black;
+  border-radius: 0.5rem;
+  z-index: 1;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+@media (max-width: 30rem), (max-height: 40rem) {
+  .options {
+    display: none;
+  }
+}

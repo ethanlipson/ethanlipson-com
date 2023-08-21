@@ -1,31 +1,33 @@
 'use client';
 
-// import Demo from '../../demo-files/cloth/demo';
 import Demo from '@/src/demos/cloth/demo';
-import { NextPage } from 'next';
-// import DemoTemplate from '../../components/DemoTemplate';
-import { Raleway } from 'next/font/google';
 import DemoTemplate from '@/src/components/demoTemplate';
-import Link from 'next/link';
 
-const ralewayHeavy = Raleway({ subsets: ['latin'], weight: '800' });
-const raleway = Raleway({ subsets: ['latin'], weight: '500' });
-
-const Cloth: NextPage = () => {
+export default function Cloth() {
   return (
     <DemoTemplate demo={<Demo />}>
-      <h1>About</h1>
+      <h1>Cloth</h1>
       <p>
-        Email:{' '}
-        <Link href="mailto:ethan.lipson@columbia.edu">
-          ethan.lipson@columbia.edu
-        </Link>
+        GPU-accelerated cloth simulation using WebGL fragment shaders for
+        parallel computation. Built within the Position Based Dynamics
+        framework, this simulation is performant and extremely stable.
       </p>
+      <h3>Controls</h3>
       <p>
-        My <Link href="/resume.pdf">resume</Link>
+        Left click + drag to move cloth
+        <br />
+        Scroll while dragging cloth to change depth
+        <br />
+        Space to pause/play
+        <br />
+        R to reset scene
+        <br />
+        WASD + EQ to move camera
+        <br />
+        Right click + drag to rotate camera
+        <br />
+        Hold shift to speed up camera movement
       </p>
     </DemoTemplate>
   );
-};
-
-export default Cloth;
+}

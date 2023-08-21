@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 80">
+<g 
+  stroke-width="1"
+  stroke="#777"
+  fill="#aaa">
+  <path
+    d="M25,0
+  c0,20 -25,10 -25,30
+  v20
+  c0,20, 25,10, 25,30
+"
+  /></g>
+  <g
+  fill="none"
+  stroke-width="2"
+  stroke="#777">
+  <polygon points="5,32 20,32 20,47 5,47" /></g>
+</svg>

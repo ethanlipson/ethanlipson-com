@@ -1,0 +1,9 @@
+.heat-simulation {
+  text-align: center;
+  user-select: none;
+}
+
+.heat-simulation canvas {
+  touch-action: none;
+  display: block;
+}

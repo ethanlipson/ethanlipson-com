@@ -29,11 +29,11 @@ export default function PageTemplate({
       />
       <main className="py-24 bg-white flex justify-center">
         <div
-          className={`w-5/6 max-w-3xl flex flex-col gap-4 [&>h1]:text-5xl [&>h1]:text-center [&>h1]:uppercase [&>p]:text-md`}
+          className={`w-5/6 max-w-3xl flex flex-col gap-4 [&>h1]:text-5xl [&>h2]:text-4xl [&>h3]:text-3xl [&>h1]:text-center [&>h2]:text-center [&>h3]:text-center [&>h1]:uppercase [&>h2]:uppercase [&>h3]:uppercase [&>p]:text-md`}
         >
           {children}
           <style>{`
-            h1 {
+            h1, h2, h3 {
               font-family: ${ralewayHeavy.style.fontFamily};
             }
 

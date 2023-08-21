@@ -13,13 +13,18 @@
     "@types/node": "20.5.1",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
+    "@types/three": "^0.155.0",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
+    "expr-eval": "^2.0.2",
     "gl-matrix": "^3.4.3",
+    "mathjs": "^11.9.1",
     "next": "13.4.19",
     "react": "18.2.0",
+    "react-device-detect": "^2.2.3",
     "react-dom": "18.2.0",
     "styled-jsx": "^5.1.2",
+    "three": "^0.155.0",
     "typescript": "5.1.6"
   },
   "devDependencies": {

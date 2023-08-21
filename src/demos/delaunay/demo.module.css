@@ -1,0 +1,9 @@
+.delaunay {
+  background-color: white;
+  user-select: none;
+}
+
+.delaunay canvas {
+  touch-action: none;
+  display: block;
+}

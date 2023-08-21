@@ -4,6 +4,7 @@
 
 :root {
   background-color: #171717;
+  font-feature-settings: 'lnum' 1;
 }
 
 a {

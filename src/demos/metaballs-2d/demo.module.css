@@ -1,0 +1,10 @@
+.metaballs-2d {
+  text-align: center;
+  user-select: none;
+  background-color: white;
+}
+
+.metaballs-2d canvas {
+  touch-action: none;
+  display: block;
+}

@@ -27,52 +27,45 @@ const videos = [
 export default function Home() {
   return (
     <PageTemplate>
-      <h1
-        className={`${ralewayHeavy.className} text-5xl text-center uppercase`}
-      >
-        Home
-      </h1>
-      <p className={`${raleway.className} text-md`}>
+      <h1>Home</h1>
+      <p>
         I&apos;m Ethan Lipson, rising sophomore at Columbia University and
         Stuyvesant High School alumnus studying mathematics.
       </p>
-      <p className={`${raleway.className} text-md`}>
+      <p>
         I take pride in my programming ability, specifically in my knowledge of
         parallel GPU computation. It&apos;s the secret ingredient that allows me
         to take my understanding of advanced math and turn it into real,
         tangible software -- check out my projects to see.
       </p>
-      <p className={`${raleway.className} text-md`}>
+      <p>
         View my resume <Link href="/resume.pdf">here</Link>.
       </p>
-      <h1
-        className={`${ralewayHeavy.className} text-5xl text-center uppercase`}
-      >
-        My Work
-      </h1>
+      <h1>My Work</h1>
       <div className="flex flex-row justify-center">
         <div className="w-5/6 grid grid-cols-4 grid-rows-3 gap-x-[1%] gap-y-[4%]">
           {videos.map((video, i) => (
-            <video
-              key={i}
-              muted
-              playsInline
-              onMouseOver={event => {
-                (event.target as HTMLVideoElement).play();
-              }}
-              onMouseOut={event => {
-                (event.target as HTMLVideoElement).pause();
-                (event.target as HTMLVideoElement).currentTime = 0;
-              }}
-              onTouchStart={event => event.stopPropagation()}
-              onTouchMove={event => event.stopPropagation()}
-              onTouchEnd={event => event.stopPropagation()}
-            >
-              <source
-                src={`/demo-videos/${video}.mp4#t=0.05`}
-                type="video/mp4"
-              />
-            </video>
+            <Link key={i} href={`demos/${video}`}>
+              <video
+                muted
+                playsInline
+                onMouseOver={event => {
+                  (event.target as HTMLVideoElement).play();
+                }}
+                onMouseOut={event => {
+                  (event.target as HTMLVideoElement).pause();
+                  (event.target as HTMLVideoElement).currentTime = 0;
+                }}
+                onTouchStart={event => event.stopPropagation()}
+                onTouchMove={event => event.stopPropagation()}
+                onTouchEnd={event => event.stopPropagation()}
+              >
+                <source
+                  src={`/demo-videos/${video}.mp4#t=0.05`}
+                  type="video/mp4"
+                />
+              </video>
+            </Link>
           ))}
         </div>
       </div>

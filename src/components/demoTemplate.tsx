@@ -1,15 +1,11 @@
 'use client';
 
-import Navbar from '@/src/components/navbar';
 import { Raleway } from 'next/font/google';
-import Link from 'next/link';
-import Demo from '../demos/cloth/demo';
-// import '../globals.css';
+import Image from 'next/image';
+import { useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import '../../app/globals.css';
 import PageTemplate from './pageTemplate';
-
-const ralewayHeavy = Raleway({ subsets: ['latin'], weight: '800' });
-const raleway = Raleway({ subsets: ['latin'], weight: '500' });
 
 interface Props {
   children: React.ReactNode;
@@ -18,8 +14,10 @@ interface Props {
 
 // export default function DemoTemplate() {
 export default function DemoTemplate({ children, demo }: Props) {
+  const [infoBoxShowing, setInfoBoxShowing] = useState(false);
+
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row max-h-[100dvh] @container">
       <div className="overflow-hidden">
         <div
           style={{
@@ -32,9 +30,31 @@ export default function DemoTemplate({ children, demo }: Props) {
           {demo}
         </div>
       </div>
-      <div className="shrink-0 flex flex-col w-1/4">
+
+      <div
+        className={`shrink-0 flex flex-col transition-all duration-300 ${
+          infoBoxShowing ? (isMobile ? 'w-full' : 'w-1/4') : 'w-0'
+        } overflow-x-visible overflow-y-scroll relative`}
+      >
         <PageTemplate>{children}</PageTemplate>
       </div>
+      <button
+        onClick={() => setInfoBoxShowing(showing => !showing)}
+        className={`absolute transition-all duration-300 ${
+          infoBoxShowing
+            ? `${
+                isMobile ? 'left-0' : 'right-1/4 translate-x-[calc(100%-1px)]'
+              }`
+            : 'right-0'
+        } top-1/2 -translate-y-1/2`}
+      >
+        {infoBoxShowing && (
+          <Image src="/tabs/tab-right.svg" alt="" width={25} height={0} />
+        )}
+        {!infoBoxShowing && (
+          <Image src="/tabs/tab-left-2.svg" alt="" width={25} height={0} />
+        )}
+      </button>
     </div>
   );
 }

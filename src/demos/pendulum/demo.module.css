@@ -1,0 +1,7 @@
+.pendulum {
+  background-color: white;
+}
+
+.pendulum canvas {
+  display: block;
+}
