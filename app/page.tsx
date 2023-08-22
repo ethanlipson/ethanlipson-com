@@ -1,13 +1,8 @@
 'use client';
 
-import Navbar from '@/src/components/navbar';
 import PageTemplate from '@/src/components/pageTemplate';
-import { Raleway } from 'next/font/google';
 import Link from 'next/link';
 import './globals.css';
-
-const ralewayHeavy = Raleway({ subsets: ['latin'], weight: '800' });
-const raleway = Raleway({ subsets: ['latin'], weight: '500' });
 
 const videos = [
   'fluid',
