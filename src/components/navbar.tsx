@@ -1,5 +1,5 @@
 import { Ubuntu } from 'next/font/google';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'tailwindcss/tailwind.css';
 import '../../app/hamburgers.css';
 
@@ -8,10 +8,21 @@ const ubuntu = Ubuntu({ subsets: ['latin'], weight: '400' });
 interface Props {
   highlightWriting?: boolean;
   highlightAbout?: boolean;
+  startWithCloseAnimation?: boolean;
 }
 
-export default function Navbar({ highlightWriting, highlightAbout }: Props) {
+export default function Navbar({
+  highlightWriting,
+  highlightAbout,
+  startWithCloseAnimation,
+}: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // useEffect(() => {
+  //   if (startWithCloseAnimation) {
+  //     setMenuOpen(false);
+  //   }
+  // }, []);
 
   const home = (
     <a href="/" className="text-white text-3xl">
