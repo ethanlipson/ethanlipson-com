@@ -232,42 +232,45 @@ export default function Writing() {
         and a relation between objects <Latex>$\sim$</Latex>, you can begin
         reasoning about <Latex>$S/\!\sim$</Latex>.
       </p>
+      <ol className="list-decimal flex flex-col gap-4">
+        <li>
+          Consider <Latex>$\mathbb Z \times \mathbb Z$</Latex>, the set of all
+          pairs of integers. If we apply the relation{' '}
+          <Latex>$(a, b) \sim (c, d) \Longleftrightarrow ad = bc$</Latex>, then
+          congratulations! You&apos;ve constructed{' '}
+          <Latex>$(\mathbb Z \times \mathbb Z) / \! \sim$</Latex>, the set of
+          fractions, also known as <Latex>$\mathbb Q$</Latex>. If it&apos;s
+          unclear why, observe how you can cross-multiply two equal fractions
+          and look at the formula you get.
+        </li>
+        <li>
+          The integers mod 5, written <Latex>$\mathbb Z_5$</Latex>, can be
+          constructed using the relation{' '}
+          <Latex>
+            {'$a \\sim b \\Longleftrightarrow 5\\ \\mathrm{divides}\\ (a - b)$'}
+          </Latex>
+          . Then, <Latex>$\mathbb Z_5$</Latex> is nothing but{' '}
+          <Latex>$\mathbb Z / \! \sim$</Latex>. Think about why we can only have
+          5 elements in this set!
+        </li>
+        <li>
+          Consider <Latex>{'$\\mathbb R^{3 \\times 3}$'}</Latex> (the set of 3x3
+          matrices) and the relation{' '}
+          <Latex>$A \sim B \Longleftrightarrow \det A = \det B$</Latex>. Because
+          we consider two matrices the same if they have the same determinant,
+          each collection of &quot;equivalent&quot; matrices can be identified
+          by its determinant. So,{' '}
+          <Latex>{'$\\mathbb R^{3 \\times 3} / \\! \\sim$'}</Latex> behaves like{' '}
+          <Latex>$\mathbb R$</Latex> under multiplication, since determinants
+          multiply when multiplying matrices.
+        </li>
+      </ol>
       <p>
-        <ol className="list-decimal flex flex-col gap-4">
-          <li>
-            Consider <Latex>$\mathbb Z \times \mathbb Z$</Latex>, the set of all
-            pairs of integers. If we apply the relation{' '}
-            <Latex>$(a, b) \sim (c, d) \Longleftrightarrow ad = bc$</Latex>,
-            then congratulations! You&apos;ve constructed{' '}
-            <Latex>$(\mathbb Z \times \mathbb Z) / \! \sim$</Latex>, the set of
-            fractions, also known as <Latex>$\mathbb Q$</Latex>. If it&apos;s
-            unclear why, observe how you can cross-multiply two equal fractions
-            and look at the formula you get.
-          </li>
-          <li>
-            The integers mod 5, written <Latex>$\mathbb Z_5$</Latex>, can be
-            constructed using the relation{' '}
-            <Latex>
-              {
-                '$a \\sim b \\Longleftrightarrow 5\\ \\mathrm{divides}\\ (a - b)$'
-              }
-            </Latex>
-            . Then, <Latex>$\mathbb Z_5$</Latex> is nothing but{' '}
-            <Latex>$\mathbb Z / \! \sim$</Latex>. Think about why we can only
-            have 5 elements in this set!
-          </li>
-          <li>
-            Consider <Latex>{'$\\mathbb R^{3 \\times 3}$'}</Latex> (the set of
-            3x3 matrices) and the relation{' '}
-            <Latex>$A \sim B \Longleftrightarrow \det A = \det B$</Latex>.
-            Because we consider two matrices the same if they have the same
-            determinant, each collection of &quot;equivalent&quot; matrices can
-            be identified by its determinant. So,{' '}
-            <Latex>{'$\\mathbb R^{3 \\times 3} / \\! \\sim$'}</Latex> behaves
-            like <Latex>$\mathbb R$</Latex> under multiplication, since
-            determinants multiply when multiplying matrices.
-          </li>
-        </ol>
+        Hopefully these examples have elucidated the convenience of quotient
+        sets in mathematics. They&apos;re not always strictly necessary (you
+        knew what a fraction was before reading this article), but they can
+        allow us to construct complicated behavior by &quot;filtering down&quot;
+        large, easy-to-describe objects.
       </p>
     </PageTemplate>
   );
