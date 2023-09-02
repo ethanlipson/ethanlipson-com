@@ -22,9 +22,9 @@ const Blue: React.FC<Props> = ({ children }: Props) => (
 
 export default function Writing() {
   return (
-    <PageTemplate>
+    <PageTemplate highlightWriting>
       <h3>Complex Numbers are Secretly Polynomials</h3>
-      <h4>August 21, 2023</h4>
+      <h5>September 2, 2023</h5>
       <p>
         8 and 14 are equal, mod 3. They have the same remainder, so this should
         come as no surprise. Let&apos;s draw it out anyway.
@@ -65,7 +65,7 @@ export default function Writing() {
         What does this have to do with complex numbers or polynomials? All in
         due time.
       </p>
-      <h4>***</h4>
+      <h4>The Naive Approach</h4>
       <p>
         If I were to ask you to give me a polynomial representation of a complex
         number, you&apos;d probably give me something like{' '}
@@ -89,9 +89,9 @@ export default function Writing() {
       </p>
       <Latex>$$(1 + i)(1 + i) = 2i$$ $$(1 + x)(1 + x) = 2x + x^2 + 1$$</Latex>
       <p>
-        We get different answers, but different <i>how?</i>. I&apos;ve written
-        it a bit suggestively, but you might notice that the difference between
-        the two results is <Latex>$x^2 + 1$</Latex>, the defining polynomial for{' '}
+        We get different answers, but different <i>how?</i> I&apos;ve written it
+        a bit suggestively, but you might notice that the difference between the
+        two results is <Latex>$x^2 + 1$</Latex>, the defining polynomial for{' '}
         <Latex>$i$</Latex>. Coincidence? Let&apos;s try another.
       </p>
       <Latex>$$(3 + 4i)(10 + 2i)(7 - 3i)$$$$= 292 + 256i$$</Latex>
@@ -166,7 +166,7 @@ export default function Writing() {
       <p>
         This is where quotient sets come in. The expression{' '}
         <Latex>$\mathbb R[x] / (x^2 + 1)$</Latex> (read &quot;R[x] mod
-        x-squared-plus-one&quot; tells us work within{' '}
+        x-squared-plus-one&quot;) tells us to work within{' '}
         <Latex>$\mathbb R[x]$</Latex>, but to &quot;ignore&quot; the{' '}
         <Red>
           <Latex>$Q$</Latex>
@@ -197,6 +197,77 @@ export default function Writing() {
         Since they all have the same remainder, mod <Latex>$x^2 + 1$</Latex>.
         Equivalently, if you plug in <Latex>$x = i$</Latex>, you&apos;ll see
         that they all evaluate to the same thing.
+      </p>
+      <h4>General Quotients</h4>
+      <p>
+        The fundamental idea here is that if we have a set of objects{' '}
+        <Latex>$S$</Latex>, we can make a smaller version by considering some
+        objects the same; in the case of{' '}
+        <Latex>$\mathbb R[x] / (x^2 + 1)$</Latex>, <Latex>$S$</Latex> is the set
+        of polynomials, and we consider two the same if they differ by a
+        multiple of <Latex>$x^2 + 1$</Latex>.
+      </p>
+      <InfoBox title="Relations">
+        <p>
+          A <i>relation</i> is any rule you come up with that says if two
+          objects are &quot;the same&quot;. For example, the relation for{' '}
+          <Latex>$\mathbb R[x] / (x^2 + 1)$</Latex> is &quot;two polynomials are
+          the same if they differ by a multiple of <Latex>$x^2 + 1$</Latex>
+          &quot;.
+        </p>
+        <p>
+          Relations are often denoted using the <Latex>$\sim$</Latex> symbol.
+          Symbolically, we&apos;d say{' '}
+          <Latex>
+            {
+              '$$f \\sim g \\Longleftrightarrow x^2 + 1\\ \\mathrm{divides}\\ (f - g)$$'
+            }
+          </Latex>
+        </p>
+      </InfoBox>
+      <p>
+        We can go much further than &quot;two objects are the same based on
+        their difference&quot;. In fact, we can construct a quotient set from
+        just about any relation you want. If you have a set <Latex>$S$</Latex>{' '}
+        and a relation between objects <Latex>$\sim$</Latex>, you can begin
+        reasoning about <Latex>$S/\!\sim$</Latex>.
+      </p>
+      <p>
+        <ol className="list-decimal flex flex-col gap-4">
+          <li>
+            Consider <Latex>$\mathbb Z \times \mathbb Z$</Latex>, the set of all
+            pairs of integers. If we apply the relation{' '}
+            <Latex>$(a, b) \sim (c, d) \Longleftrightarrow ad = bc$</Latex>,
+            then congratulations! You&apos;ve constructed{' '}
+            <Latex>$(\mathbb Z \times \mathbb Z) / \! \sim$</Latex>, the set of
+            fractions, also known as <Latex>$\mathbb Q$</Latex>. If it&apos;s
+            unclear why, observe how you can cross-multiply two equal fractions
+            and look at the formula you get.
+          </li>
+          <li>
+            The integers mod 5, written <Latex>$\mathbb Z_5$</Latex>, can be
+            constructed using the relation{' '}
+            <Latex>
+              {
+                '$a \\sim b \\Longleftrightarrow 5\\ \\mathrm{divides}\\ (a - b)$'
+              }
+            </Latex>
+            . Then, <Latex>$\mathbb Z_5$</Latex> is nothing but{' '}
+            <Latex>$\mathbb Z / \! \sim$</Latex>. Think about why we can only
+            have 5 elements in this set!
+          </li>
+          <li>
+            Consider <Latex>{'$\\mathbb R^{3 \\times 3}$'}</Latex> (the set of
+            3x3 matrices) and the relation{' '}
+            <Latex>$A \sim B \Longleftrightarrow \det A = \det B$</Latex>.
+            Because we consider two matrices the same if they have the same
+            determinant, each collection of &quot;equivalent&quot; matrices can
+            be identified by its determinant. So,{' '}
+            <Latex>{'$\\mathbb R^{3 \\times 3} / \\! \\sim$'}</Latex> behaves
+            like <Latex>$\mathbb R$</Latex> under multiplication, since
+            determinants multiply when multiplying matrices.
+          </li>
+        </ol>
       </p>
     </PageTemplate>
   );

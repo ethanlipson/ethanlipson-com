@@ -7,7 +7,7 @@ interface Props {
 
 export default function InfoBox({ title, children }: Props) {
   return (
-    <div className="p-4 bg-gray-200 border-b-4 border-r-4 border-gray-300 flex flex-col gap-2">
+    <div className="p-4 bg-gray-200 border-b-[0.2rem] border-r-[0.2rem] border-gray-300 flex flex-col gap-2">
       <div className="flex flex-row gap-4 items-center">
         <span className="grow h-0.5 bg-gray-400" />
         <h5>{title}</h5>

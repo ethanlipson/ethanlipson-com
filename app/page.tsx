@@ -24,7 +24,7 @@ export default function Home() {
     <PageTemplate>
       <h1>Home</h1>
       <p>
-        I&apos;m Ethan Lipson, rising sophomore at Columbia University and
+        I&apos;m Ethan Lipson, sophomore at Columbia University and
         Stuyvesant High School alumnus studying mathematics.
       </p>
       <p>

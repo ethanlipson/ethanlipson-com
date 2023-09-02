@@ -6,7 +6,7 @@ import '../globals.css';
 
 export default function About() {
   return (
-    <PageTemplate>
+    <PageTemplate highlightAbout>
       <h1>About</h1>
       <p>
         Email:{' '}

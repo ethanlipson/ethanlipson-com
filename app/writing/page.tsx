@@ -6,10 +6,10 @@ import '../globals.css';
 
 export default function Writing() {
   return (
-    <PageTemplate>
+    <PageTemplate highlightWriting>
       <h1>Writing</h1>
       <p>
-        August 21, 2023
+        September 2, 2023
         <br />
         <Link href="/writing/complex">
           <b>Complex Numbers are Secretly Polynomials</b>
