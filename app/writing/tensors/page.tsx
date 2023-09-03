@@ -28,7 +28,7 @@ export default function Writing() {
         exactly solve this problem.
       </p>
       <h4>Almost Linear</h4>
-      <InfoBox title="Refresher on Linear Functions">
+      <InfoBox title="Linearity Refresher">
         <p>
           A function <Latex>$f$</Latex> is linear if it obeys the following two
           rules:
@@ -111,7 +111,7 @@ export default function Writing() {
         <Image
           src={universal1}
           alt="Universal Property of Tensors Example"
-          className="w-1/3"
+          className="w-64"
         />
       </div>
       <p>
@@ -130,7 +130,7 @@ export default function Writing() {
         <Image
           src={universal2}
           alt="Universal Property of Tensors"
-          className="w-1/3"
+          className="w-64"
         />
       </div>
       <p>
@@ -173,6 +173,40 @@ export default function Writing() {
           same is true for the other component as well.
         </li>
       </ol>
+      <InfoBox title="Is that it?">
+        <p>
+          It&apos;s at this point that many people ask, &quot;ok, but{' '}
+          <i>what is </i>
+          <Latex>$u \otimes v$</Latex>? What does it mean?&quot; It may be hard
+          to accept, but the truth is that the <Latex>$\otimes$</Latex> symbol
+          really doesn&apos;t <i>mean</i> anything -- it&apos;s just a glue
+          holding two vectors together. Treat it as a symbol that we manipulate
+          according to certain rules, and nothing more.
+        </p>
+      </InfoBox>
+      <p>
+        Returning to our example, notice that{' '}
+        <Latex>
+          {
+            '$\\dim(\\mathbb R^3 \\otimes \\mathbb R^3) = \\dim(\\mathbb R^{3 \\times 3}) = 9$'
+          }
+        </Latex>{' '}
+        as we expect. More explicitly, the correspondence might look something
+        like
+        <Latex>
+          {`$$\\begin{pmatrix}
+            e_1 \\otimes e_1 & e_1 \\otimes e_2 & e_1 \\otimes e_3 \\\\
+            e_2 \\otimes e_1 & e_2 \\otimes e_2 & e_2 \\otimes e_3 \\\\
+            e_3 \\otimes e_1 & e_3 \\otimes e_2 & e_3 \\otimes e_3
+          \\end{pmatrix}$$`}
+        </Latex>{' '}
+        where <Latex>$e_i$</Latex> is the standard basis for{' '}
+        <Latex>$\mathbb R^3$</Latex>. Every matrix is the sum of 9 basis
+        matrices, and every tensor is the sum of 9 basis tensors{' '}
+        <Latex>$e_i \otimes e_j$</Latex>. But equipped with the general language
+        of tensor products, we no longer need to talk about matrices to solve
+        our linearity problem.
+      </p>
     </PageTemplate>
   );
 }
