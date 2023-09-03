@@ -51,7 +51,7 @@ export default function Fluid() {
         is each particle&apos;s position and velocity. If we can do that
         efficiently and realistically, we can create fascinating simulations.
       </p>
-      <img src="/images/particles.png" alt="Particles" />
+      <img src="/media/demos/images/particles.png" alt="Particles" />
       <h3>Fluid Particles</h3>
       <p>
         If we&apos;re using particle simulation as our framework, then the

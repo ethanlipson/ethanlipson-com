@@ -57,7 +57,7 @@ export default function Home() {
                 onTouchEnd={event => event.stopPropagation()}
               >
                 <source
-                  src={`/demo-videos/${video}.mp4#t=0.05`}
+                  src={`/media/demos/videos/${video}.mp4#t=0.05`}
                   type="video/mp4"
                 />
               </video>

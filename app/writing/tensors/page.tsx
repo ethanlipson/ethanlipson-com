@@ -5,8 +5,8 @@ import '../../globals.css';
 import 'katex/dist/katex.min.css';
 import InfoBox from '@/src/components/infoBox';
 import Latex from 'react-latex-next';
-import universal1 from '@/public/tensors-universal-prop-1.png';
-import universal2 from '@/public/tensors-universal-prop-2.png';
+import universal1 from '@/public/media/writing/tensors/universal1.png';
+import universal2 from '@/public/media/writing/tensors/universal2.png';
 import Image from 'next/image';
 
 export default function Writing() {

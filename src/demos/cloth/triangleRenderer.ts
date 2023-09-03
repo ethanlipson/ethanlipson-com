@@ -204,7 +204,7 @@ export default class TriangleRenderer {
     this.numParticlesZ = numParticlesZ;
 
     const image = new Image();
-    image.src = '/images/columbia.png';
+    image.src = '/media/demos/images/columbia.png';
     image.onload = () => {
       const texture = gl.createTexture()!;
       gl.activeTexture(gl.TEXTURE11);

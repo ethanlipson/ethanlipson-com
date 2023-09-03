@@ -43,7 +43,7 @@ export default function Metaballs3D() {
         the numbers are big enough. In other words, metaballs are clumps of big
         numbers in this grid.
       </p>
-      <img src="/images/number-grid.png" alt="Number grid" />
+      <img src="/media/demos/images/number-grid.png" alt="Number grid" />
       <p>
         A grid like this is called a <i>scalar field</i>, since in the math
         business, we often call numbers scalars. If you pause the demo and fly
@@ -72,7 +72,10 @@ export default function Metaballs3D() {
         <a href="https://www.youtube.com/watch?v=M3iI2l0ltbE">in video form</a>.
         The upshot is that it allows us to create something like this:
       </p>
-      <img src="/images/coarse-metaballs.png" alt="Marching cubes" />
+      <img
+        src="/media/demos/images/coarse-metaballs.png"
+        alt="Marching cubes"
+      />
       <p>
         The fineness of the grid has been reduced for clarity, but save for the
         lack of color, this looks pretty similar to the demo shown here.

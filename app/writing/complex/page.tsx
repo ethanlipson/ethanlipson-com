@@ -6,7 +6,7 @@ import '../../globals.css';
 import 'katex/dist/katex.min.css';
 import InfoBox from '@/src/components/infoBox';
 import Image from 'next/image';
-import remainders from '@/public/remainders.png';
+import remainders from '@/public/media/writing/complex/remainders.png';
 
 interface Props {
   children: React.ReactNode;

@@ -1,6 +1,5 @@
 'use client';
 
-import { Raleway } from 'next/font/google';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -63,10 +62,20 @@ export default function DemoTemplate({ children, demo }: Props) {
         ref={buttonRef}
       >
         {infoBoxShowing && (
-          <Image src="/tabs/tab-right.svg" alt="" width={25} height={0} />
+          <Image
+            src="/media/demos/tabs/tab-right.svg"
+            alt=""
+            width={25}
+            height={0}
+          />
         )}
         {!infoBoxShowing && (
-          <Image src="/tabs/tab-left-2.svg" alt="" width={25} height={0} />
+          <Image
+            src="/media/demos/tabs/tab-left.svg"
+            alt=""
+            width={25}
+            height={0}
+          />
         )}
       </button>
     </div>
