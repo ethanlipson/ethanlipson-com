@@ -24,8 +24,8 @@ export default function Home() {
     <PageTemplate>
       <h1>Home</h1>
       <p>
-        I&apos;m Ethan Lipson, sophomore at Columbia University and
-        Stuyvesant High School alumnus studying mathematics.
+        I&apos;m Ethan Lipson, sophomore at Columbia University and Stuyvesant
+        High School alumnus studying mathematics.
       </p>
       <p>
         I take pride in my programming ability, specifically in my knowledge of
@@ -42,6 +42,7 @@ export default function Home() {
           {videos.map((video, i) => (
             <Link key={i} href={`demos/${video}`}>
               <video
+                loop
                 muted
                 playsInline
                 onMouseOver={event => {
