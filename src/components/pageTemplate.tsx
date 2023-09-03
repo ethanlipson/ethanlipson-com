@@ -38,7 +38,7 @@ export default function PageTemplate({
               font-family: ${ralewayHeavy.style.fontFamily};
             }
 
-            p, h4, h5 {
+            p, h4, h5, ol {
               font-family: ${raleway.style.fontFamily};
             }
           `}</style>
