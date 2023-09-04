@@ -10,3 +10,7 @@
 a {
   color: gray;
 }
+
+html {
+  scroll-behavior: smooth;
+}

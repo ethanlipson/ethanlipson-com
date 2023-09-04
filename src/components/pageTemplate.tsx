@@ -29,9 +29,7 @@ export default function PageTemplate({
         startWithCloseAnimation
       />
       <main className="py-24 bg-white flex justify-center">
-        <div
-          className={`w-5/6 max-w-3xl flex flex-col gap-4 [&_h1]:text-5xl [&_h2]:text-4xl [&_h3]:text-3xl [&_h4]:text-2xl [&_h5]:text-xl [&_h1]:text-center [&_h2]:text-center [&_h3]:text-center [&_h4]:text-center [&_h5]:text-center [&_h1]:uppercase [&_h2]:uppercase [&_h3]:uppercase [&_p]:text-md`}
-        >
+        <div className="w-5/6 max-w-3xl flex flex-col gap-4 [&_h1]:text-5xl [&_h2]:text-4xl [&_h3]:text-3xl [&_h4]:text-2xl [&_h5]:text-xl [&_h1]:text-center [&_h2]:text-center [&_h3]:text-center [&_h4]:text-center [&_h5]:text-center [&_h1]:uppercase [&_h2]:uppercase [&_h3]:uppercase [&_p]:text-md">
           {children}
           <style>{`
             h1, h2, h3 {

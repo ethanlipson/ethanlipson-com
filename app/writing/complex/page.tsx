@@ -166,17 +166,23 @@ export default function Writing() {
       <p>
         This is where quotient sets come in. The expression{' '}
         <Latex>$\mathbb R[x] / (x^2 + 1)$</Latex> (read &quot;R[x] mod
-        x-squared-plus-one&quot;) tells us to work within{' '}
+        x-squared-plus-one&quot;.) tells us to work within{' '}
         <Latex>$\mathbb R[x]$</Latex>, but to &quot;ignore&quot; the{' '}
         <Red>
           <Latex>$Q$</Latex>
         </Red>{' '}
         part -- if that sounds familiar, it&apos;s exactly what we did with
-        division by 3 at the start of the article. Specifically, it calls two
-        polynomials the same if they differ only by a multiple of{' '}
-        <Latex>$x^2 + 1$</Latex>. This lines up with our understanding of
-        complex numbers: if <Latex>$z$</Latex> and <Latex>$w$</Latex> differ by
-        a multiple of <Latex>$i^2 + 1$</Latex>, are they really different?
+        division by 3 at the start of the article.
+        <sup>
+          <a id="footnote-1-ref" href="#footnote-1">
+            [1]
+          </a>
+        </sup>{' '}
+        Specifically, it calls two polynomials the same if they differ only by a
+        multiple of <Latex>$x^2 + 1$</Latex>. This lines up with our
+        understanding of complex numbers: if <Latex>$z$</Latex> and{' '}
+        <Latex>$w$</Latex> differ by a multiple of <Latex>$i^2 + 1$</Latex>, are
+        they really different?
       </p>
       <p>
         Just like we can talk about integers mod 3, we can talk about
@@ -196,7 +202,15 @@ export default function Writing() {
       <p>
         Since they all have the same remainder, mod <Latex>$x^2 + 1$</Latex>.
         Equivalently, if you plug in <Latex>$x = i$</Latex>, you&apos;ll see
-        that they all evaluate to the same thing.
+        that they all evaluate to the same thing. Technically, we&apos;d say{' '}
+        <Latex>$\mathbb C$</Latex> and <Latex>$\mathbb R[x] / (x^2 + 1)$</Latex>{' '}
+        are <i>isomorphic</i>, meaning they &quot;act the same&quot; with
+        regards to addition and multiplication.
+        <sup>
+          <a id="footnote-2-ref" href="#footnote-2">
+            [2]
+          </a>
+        </sup>
       </p>
       <h4>General Quotients</h4>
       <p>
@@ -210,7 +224,13 @@ export default function Writing() {
       <InfoBox title="Relations">
         <p>
           A <i>relation</i> is any rule you come up with that says if two
-          objects are &quot;the same&quot;. For example, the relation for{' '}
+          objects are &quot;the same&quot;.
+          <sup>
+            <a id="footnote-3-ref" href="#footnote-3">
+              [3]
+            </a>
+          </sup>{' '}
+          For example, the relation for{' '}
           <Latex>$\mathbb R[x] / (x^2 + 1)$</Latex> is &quot;two polynomials are
           the same if they differ by a multiple of <Latex>$x^2 + 1$</Latex>
           &quot;.
@@ -239,9 +259,14 @@ export default function Writing() {
           <Latex>$(a, b) \sim (c, d) \Longleftrightarrow ad = bc$</Latex>, then
           congratulations! You&apos;ve constructed{' '}
           <Latex>$(\mathbb Z \times \mathbb Z) / \! \sim$</Latex>, the set of
-          fractions, also known as <Latex>$\mathbb Q$</Latex>. If it&apos;s
-          unclear why, observe how you can cross-multiply two equal fractions
-          and look at the formula you get.
+          fractions, also known as <Latex>$\mathbb Q$</Latex>.
+          <sup>
+            <a id="footnote-4-ref" href="#footnote-4">
+              [4]
+            </a>
+          </sup>{' '}
+          If it&apos;s unclear why, observe how you can cross-multiply two equal
+          fractions and look at the formula you get.
         </li>
         <li>
           The integers mod 5, written <Latex>$\mathbb Z_5$</Latex>, can be
@@ -272,6 +297,88 @@ export default function Writing() {
         allow us to construct complicated behavior by &quot;filtering down&quot;
         large, easy-to-describe objects.
       </p>
+      <div className="flex flex-row justify-center">
+        <div className="w-[90%] h-[1px] bg-gray-400 mt-4" />
+      </div>
+      <ol className="list-decimal flex flex-col gap-4 mx-8 text-sm">
+        <li id="footnote-1">
+          In the language of{' '}
+          <a target="_blank" href="https://en.wikipedia.org/wiki/Ring_theory">
+            ring theory
+          </a>
+          , <Latex>$\mathbb R[x]$</Latex> is actually read &quot;R adjoin
+          x&quot;, so the whole thing should be read &quot;R-adjoin-x mod
+          x-squared-plus-one&quot;. <a href="#footnote-1-ref">&#8617;</a>
+        </li>
+        <li id="footnote-2">
+          The term &quot;isomorphic&quot; comes from the Greek &quot;iso-&quot;
+          meaning equal and &quot;morphe&quot; meaning shape, so understandably,
+          we generally call two mathematical structures isomorphic if they have
+          the same shape, i.e. behave the same. Specifically, this isomorphism
+          would be a{' '}
+          <a
+            target="_blank"
+            href="https://en.wikipedia.org/wiki/Ring_homomorphism"
+          >
+            ring isomorphism
+          </a>
+          . <a href="#footnote-2-ref">&#8617;</a>
+        </li>
+        <li id="footnote-3">
+          This should actually be called an{' '}
+          <a
+            target="_blank"
+            href="https://en.wikipedia.org/wiki/Equivalence_relation"
+          >
+            equivalence relation
+          </a>
+          . In general, a{' '}
+          <a
+            target="_blank"
+            href="https://en.wikipedia.org/wiki/Binary_relation"
+          >
+            relation
+          </a>{' '}
+          can really be anything we want, but equivalence relations have to
+          follow three rules:{' '}
+          <ul className="list-disc flex flex-col ml-8 my-4">
+            <li>
+              <a
+                target="_blank"
+                href="https://en.wikipedia.org/wiki/Reflexive_relation"
+              >
+                Reflexivity
+              </a>{' '}
+              - For all <Latex>$x$</Latex>, <Latex>$x \sim x$</Latex>{' '}
+            </li>
+            <li>
+              <a
+                target="_blank"
+                href="https://en.wikipedia.org/wiki/Symmetric_relation"
+              >
+                Symmetry
+              </a>{' '}
+              - <Latex>$x \sim y$</Latex> implies <Latex>$y \sim x$</Latex>{' '}
+            </li>
+            <li>
+              <a
+                target="_blank"
+                href="https://en.wikipedia.org/wiki/Transitive_relation"
+              >
+                Transitivity
+              </a>{' '}
+              - <Latex>$x \sim y$</Latex> and <Latex>$y \sim z$</Latex> implies{' '}
+              <Latex>$x \sim z$</Latex>
+            </li>
+          </ul>
+          These rules are all pretty intuitive so their omission is warranted.{' '}
+          <a href="#footnote-3-ref">&#8617;</a>
+        </li>
+        <li id="footnote-4">
+          We also stipulate that <Latex>$b, d \neq 0$</Latex>, obviously.{' '}
+          <a href="#footnote-4-ref">&#8617;</a>
+        </li>
+      </ol>
     </PageTemplate>
   );
 }

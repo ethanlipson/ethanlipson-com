@@ -45,11 +45,16 @@ export default function Writing() {
       </InfoBox>
       <p>
         Linear algebra is the study of linear functions, described above.
-        It&apos;s unique in that, in a sense, the field is almost solved. If
-        you&apos;ve taken an intro course, you might have noticed that we have
-        an extremely rich theory of how linear functions behave. So naturally,
-        if we want to understand a function better, we might try to examine it
-        from the perspective of linear algebra.
+        It&apos;s unique in that, in a sense, the field is almost solved.
+        <sup>
+          <a id="footnote-1-ref" href="#footnote-1">
+            [1]
+          </a>
+        </sup>{' '}
+        If you&apos;ve taken an intro course, you might have noticed that we
+        have an extremely rich theory of how linear functions behave. So
+        naturally, if we want to understand a function better, we might try to
+        examine it from the perspective of linear algebra.
       </p>
       <p>
         Consider the humble dot product, denoted by{' '}
@@ -120,8 +125,14 @@ export default function Writing() {
         We can take the diagonal path directly using the dot product, or we can
         take a detour through <Latex>{'$\\mathbb R^{3 \\times 3}$'}</Latex>. If
         we take that detour, we get the bonus of having a linear function.
-        Either way, you&apos;ll get the same answer. Take some time to really
-        understand what this diagram is saying -- it&apos;s not obvious.
+        Either way, you&apos;ll get the same answer.
+        <sup>
+          <a id="footnote-2-ref" href="#footnote-2">
+            [2]
+          </a>
+        </sup>{' '}
+        Take some time to really understand what this diagram is saying --
+        it&apos;s not obvious.
       </p>
       <p>
         For any &quot;almost linear&quot; function (what we&apos;d call
@@ -145,7 +156,13 @@ export default function Writing() {
       <p>
         The tensor product of two vector spaces, <Latex>$U \otimes V$</Latex>,
         lets us build a new, larger vector space that solves our linearity
-        problem. Here&apos;s how it works:
+        problem.
+        <sup>
+          <a id="footnote-3-ref" href="#footnote-3">
+            [3]
+          </a>
+        </sup>{' '}
+        Here&apos;s how it works:
       </p>
       <ol className="list-decimal flex flex-col gap-4">
         <li>
@@ -159,7 +176,13 @@ export default function Writing() {
           Pick bases <Latex>$(u_i)$</Latex> and <Latex>$(v_j)$</Latex> for{' '}
           <Latex>$U$</Latex> and <Latex>$V$</Latex>. The basis for{' '}
           <Latex>$U \otimes V$</Latex> then looks like every combination of{' '}
-          <Latex>$u_i \otimes v_j$</Latex>. As a result,{' '}
+          <Latex>$u_i \otimes v_j$</Latex>.
+          <sup>
+            <a id="footnote-4-ref" href="#footnote-4">
+              [4]
+            </a>
+          </sup>{' '}
+          As a result,{' '}
           <Latex>$\dim(U \otimes V) = \dim(U) \cdot \dim(V)$</Latex>.
         </li>
         <li>
@@ -168,6 +191,7 @@ export default function Writing() {
           <Latex>
             $\lambda(u \otimes v) = \lambda u \otimes v = u \otimes \lambda v$
           </Latex>
+          .
         </li>
         <li>
           Tensors are additive. In other words,{' '}
@@ -184,6 +208,11 @@ export default function Writing() {
           really doesn&apos;t <i>mean</i> anything -- it&apos;s just a glue
           holding two vectors together. Treat it as a symbol that we manipulate
           according to certain rules, and nothing more.
+          <sup>
+            <a id="footnote-5-ref" href="#footnote-5">
+              [5]
+            </a>
+          </sup>
         </p>
       </InfoBox>
       <p>
@@ -234,10 +263,117 @@ export default function Writing() {
       <p>
         We wanted a linear map that agrees with the bilinear map on every input.{' '}
         <Latex>$U \otimes V$</Latex> is the <i>unique</i> space that gives us a{' '}
-        <i>unique</i> agreeing linear map. If we wanted, we could have a larger
-        space containing <Latex>$U \otimes V$</Latex>, and we would certainly
-        still have our linear map. But, it would no longer be unique.
+        <i>unique</i> agreeing linear map.
+        <sup>
+          <a id="footnote-6-ref" href="#footnote-6">
+            [6]
+          </a>
+        </sup>{' '}
+        If we wanted, we could have a larger space containing{' '}
+        <Latex>$U \otimes V$</Latex>, and we would certainly still have our
+        linear map. But, it would no longer be unique.
       </p>
+      <div className="flex flex-row justify-center">
+        <div className="w-[90%] h-[1px] bg-gray-400 mt-4" />
+      </div>
+      <ol className="list-decimal flex flex-col gap-4 mx-8 text-sm">
+        <li id="footnote-1">
+          This is a bit of an exaggeration, although there certainly is an
+          element of truth to it. What&apos;s definitely true is that we have an
+          extremely strong understanding of finite-dimensional linear algebra as
+          presented in most introductory courses. Read{' '}
+          <a target="_blank" href="https://math.stackexchange.com/a/1700876">
+            this
+          </a>{' '}
+          Math Stack Exchange answer for more context.{' '}
+          <a href="#footnote-1-ref">&#8617;</a>
+        </li>
+        <li id="footnote-2">
+          A diagram like this, where you can take any path you want and get the
+          same answer, is called a{' '}
+          <a
+            target="_blank"
+            href="https://en.wikipedia.org/wiki/Commutative_diagram"
+          >
+            commutative diagram
+          </a>
+          . They come from{' '}
+          <a
+            target="_blank"
+            href="https://en.wikipedia.org/wiki/Category_theory"
+          >
+            category theory
+          </a>
+          , a language that attempts to describe mathematics in the most
+          abstract terms possible -- it has been called &quot;the mathematics of
+          mathematics&quot;. <a href="#footnote-2-ref">&#8617;</a>
+        </li>
+        <li id="footnote-3">
+          Larger in the sense that <Latex>$a \cdot b$</Latex> is typically
+          larger than <Latex>$a + b$</Latex>. Recall that{' '}
+          <Latex>{'$\\dim{A \\times B} = \\dim A + \\dim B$'}</Latex>.{' '}
+          <a href="#footnote-3-ref">&#8617;</a>
+        </li>
+        <li id="footnote-4">
+          It&apos;s at this point that any mathematicians in the audience would
+          complain that our construction is not basis-independent, to which I
+          respond with two points:
+          <ul className="list-disc flex flex-col ml-8 mt-4">
+            <li>
+              The resulting space ends up being the same no matter which basis
+              you choose.
+            </li>
+            <li>
+              The tensor product can be constructed using{' '}
+              <a
+                target="_blank"
+                href="https://en.wikipedia.org/wiki/Quotient_space_(linear_algebra)"
+              >
+                quotient spaces
+              </a>
+              , as described in{' '}
+              <a
+                target="_blank"
+                href="https://en.wikipedia.org/wiki/Tensor_product#As_a_quotient_space"
+              >
+                this article
+              </a>{' '}
+              and in{' '}
+              <a
+                target="_blank"
+                href="https://www.youtube.com/watch?v=K7f2pCQ3p3U"
+              >
+                this excellent video
+              </a>{' '}
+              by Michael Penn. Such a construction has the advantage of not
+              requiring us to pick a basis, but it may be less intuitive.{' '}
+              <a href="#footnote-4-ref">&#8617;</a>
+            </li>
+          </ul>{' '}
+        </li>
+        <li id="footnote-5">
+          This attitude towards mathematics is called{' '}
+          <a
+            target="_blank"
+            href="https://en.wikipedia.org/wiki/Formalism_(philosophy_of_mathematics)"
+          >
+            formalism
+          </a>
+          , and it&apos;s been the predominant view held by mathematicians since
+          the mid-20th century. Essentially, it states that math is not
+          &quot;about&quot; anything at all, only moving around symbols.{' '}
+          <a href="#footnote-5-ref">&#8617;</a>
+        </li>
+        <li id="footnote-6">
+          Unique up to a{' '}
+          <a target="_blank" href="https://en.wikipedia.org/wiki/Isomorphism">
+            relabeling
+          </a>
+          , of course. We could give each element of{' '}
+          <Latex>$U \otimes V$</Latex> a new name and it would still be the same
+          thing. <a href="#footnote-6-ref">&#8617;</a>
+        </li>
+      </ol>
     </PageTemplate>
   );
 }
