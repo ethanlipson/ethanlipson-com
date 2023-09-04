@@ -7,13 +7,14 @@ import InfoBox from '@/src/components/infoBox';
 import Latex from 'react-latex-next';
 import universal1 from '@/public/media/writing/tensors/universal1.png';
 import universal2 from '@/public/media/writing/tensors/universal2.png';
+import universal3 from '@/public/media/writing/tensors/universal3.png';
 import Image from 'next/image';
 
 export default function Writing() {
   return (
     <PageTemplate highlightWriting>
       <h3>What the **** is a tensor?</h3>
-      <h5>September 2, 2023</h5>
+      <h5>September 4, 2023</h5>
       <p>
         A computer scientist will tell you that a tensor is a multidimensional
         array. In differential geometry, they use tensors to talk about
@@ -91,17 +92,18 @@ export default function Writing() {
       <p>
         The dot product would then correspond to the sum of the diagonal
         entries, also known as the <i>trace</i> of a matrix. Except, you might
-        notice something: the trace is linear! for any matrix <Latex>$A$</Latex>
+        notice something: the trace is linear! For any matrix <Latex>$A$</Latex>
         , we have
       </p>
       <Latex>
-        {`$$\\lambda\\mathrm{tr}(A) = \\mathrm{tr}(\\lambda A) = \\mathrm{tr}\\begin{pmatrix}
+        {`$$\\lambda\\mathrm{tr}(A) = \\mathrm{tr}(\\lambda A)$$$$= \\mathrm{tr}\\begin{pmatrix}
             \\lambda A_{11} & \\lambda A_{12} & \\lambda A_{13} \\\\
             \\lambda A_{21} & \\lambda A_{22} & \\lambda A_{23} \\\\
             \\lambda A_{31} & \\lambda A_{32} & \\lambda A_{33}
           \\end{pmatrix}$$`}
       </Latex>
       <p>
+        (Observe how the <Latex>$\lambda$</Latex> distributes to all arguments).
         Somehow, we&apos;ve turned a nonlinear function into a linear function,
         allowing us to employ the vast wealth of linear algebra knowledge
         we&apos;ve accumulated over hundreds of years. To sum up the situation
@@ -129,7 +131,7 @@ export default function Writing() {
       <div className="flex justify-center">
         <Image
           src={universal2}
-          alt="Universal Property of Tensors"
+          alt="Universal Property of Tensors with Question Mark"
           className="w-64"
         />
       </div>
@@ -194,7 +196,7 @@ export default function Writing() {
         as we expect. More explicitly, the correspondence might look something
         like
         <Latex>
-          {`$$\\begin{pmatrix}
+          {`$$A_{ij} \\Longleftrightarrow e_i \\otimes e_j$$$$\\begin{pmatrix}
             e_1 \\otimes e_1 & e_1 \\otimes e_2 & e_1 \\otimes e_3 \\\\
             e_2 \\otimes e_1 & e_2 \\otimes e_2 & e_2 \\otimes e_3 \\\\
             e_3 \\otimes e_1 & e_3 \\otimes e_2 & e_3 \\otimes e_3
@@ -206,6 +208,35 @@ export default function Writing() {
         <Latex>$e_i \otimes e_j$</Latex>. But equipped with the general language
         of tensor products, we no longer need to talk about matrices to solve
         our linearity problem.
+      </p>
+      <p>
+        Note that not every tensor in <Latex>$U \otimes V$</Latex> can be
+        written as <Latex>$u \otimes v$</Latex>; in general, all tensors are the
+        sum of simpler tensors, like{' '}
+        <Latex>$u_1 \otimes v_1 + \cdots + u_n \otimes v_n$</Latex>. These
+        simpler tensors are called <i>pure tensors</i>.
+      </p>
+      <h4>What Tensors Do for Us</h4>
+      <p>
+        Barring a couple details I omitted, what you see above is the full
+        construction of the tensor product. What&apos;s so great about it? Going
+        back to our problem from earler, remember that we wanted to turn a
+        bilinear function into a linear one. The tensor product is the unique
+        space that lets us do this. Finally, we can complete the diagram:
+      </p>
+      <div className="flex justify-center">
+        <Image
+          src={universal3}
+          alt="Universal Property of Tensors"
+          className="w-64"
+        />
+      </div>
+      <p>
+        We wanted a linear map that agrees with the bilinear map on every input.{' '}
+        <Latex>$U \otimes V$</Latex> is the <i>unique</i> space that gives us a{' '}
+        <i>unique</i> agreeing linear map. If we wanted, we could have a larger
+        space containing <Latex>$U \otimes V$</Latex>, and we would certainly
+        still have our linear map. But, it would no longer be unique.
       </p>
     </PageTemplate>
   );
