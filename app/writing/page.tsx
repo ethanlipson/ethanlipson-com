@@ -9,16 +9,8 @@ export default function Writing() {
   return (
     <PageTemplate highlightWriting>
       <h1>Writing</h1>
-      <InfoBox title="Disclaimer">
-        <p>
-          While the math presented in these articles is accurate, the
-          terminology may be altered/simplified avoid unnecessary technical
-          details. In such cases, footnotes will link to the relevant Wikipedia
-          articles.
-        </p>
-      </InfoBox>
       <p>
-        September 4, 2023
+        September 6, 2023
         <br />
         <Link href="/writing/tensors">
           <b>What the **** is a tensor?</b>

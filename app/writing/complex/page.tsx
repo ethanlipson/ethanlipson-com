@@ -252,7 +252,7 @@ export default function Writing() {
         and a relation between objects <Latex>$\sim$</Latex>, you can begin
         reasoning about <Latex>$S/\!\sim$</Latex>.
       </p>
-      <ol className="list-decimal flex flex-col gap-4">
+      <ol className="list-decimal flex flex-col gap-4 mx-8">
         <li>
           Consider <Latex>$\mathbb Z \times \mathbb Z$</Latex>, the set of all
           pairs of integers. If we apply the relation{' '}
@@ -371,7 +371,8 @@ export default function Writing() {
               <Latex>$x \sim z$</Latex>
             </li>
           </ul>
-          These rules are all pretty intuitive so their omission is warranted.{' '}
+          {`These rules are all pretty intuitive, so I felt that their omission
+          was warranted :)`}{' '}
           <a href="#footnote-3-ref">&#8617;</a>
         </li>
         <li id="footnote-4">

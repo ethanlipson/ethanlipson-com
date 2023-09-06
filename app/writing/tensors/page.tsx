@@ -8,19 +8,19 @@ import Latex from 'react-latex-next';
 import universal1 from '@/public/media/writing/tensors/universal1.png';
 import universal2 from '@/public/media/writing/tensors/universal2.png';
 import universal3 from '@/public/media/writing/tensors/universal3.png';
+import universal4 from '@/public/media/writing/tensors/universal4.png';
 import Image from 'next/image';
 
 export default function Writing() {
   return (
     <PageTemplate highlightWriting>
       <h3>What the **** is a tensor?</h3>
-      <h5>September 4, 2023</h5>
+      <h5>September 6, 2023</h5>
       <p>
         A computer scientist will tell you that a tensor is a multidimensional
-        array. In differential geometry, they use tensors to talk about
-        &quot;multilinear maps&quot;, whatever that means. Mathematicians will
-        just say that a tensor is &quot;anything that behaves like a
-        tensor&quot;. Not helpful.
+        array. Wikipedia says that a tensor is an &quot;algebraic object
+        describing a multilinear relationship&quot;. A physicist will just tell
+        you that a tensor is anything that behaves like a tensor. Not helpful.
       </p>
       <p>
         In this article we&apos;re going to explore a view of tensors that, to
@@ -164,7 +164,7 @@ export default function Writing() {
         </sup>{' '}
         Here&apos;s how it works:
       </p>
-      <ol className="list-decimal flex flex-col gap-4">
+      <ol className="list-decimal flex flex-col gap-4 mx-8">
         <li>
           For any two vectors <Latex>$u, v$</Latex> in <Latex>$U$</Latex> and{' '}
           <Latex>$V$</Latex>, we can &quot;glue&quot; them together using{' '}
@@ -186,35 +186,20 @@ export default function Writing() {
           <Latex>$\dim(U \otimes V) = \dim(U) \cdot \dim(V)$</Latex>.
         </li>
         <li>
-          Scalars can freely move around tensors. For any{' '}
+          Scalars move freely around tensors. For any{' '}
           <Latex>$u \otimes v$</Latex>, we have{' '}
           <Latex>
             $\lambda(u \otimes v) = \lambda u \otimes v = u \otimes \lambda v$
           </Latex>
-          .
+          . In other words, the magnitude of the tensor can be
+          &quot;shared&quot; by its constituents.
         </li>
         <li>
-          Tensors are additive. In other words,{' '}
+          Tensors are additive, so{' '}
           <Latex>$(u + v) \otimes w = u \otimes w + v \otimes w$</Latex>. The
           same is true for the other component as well.
         </li>
       </ol>
-      <InfoBox title="Is that it?">
-        <p>
-          It&apos;s at this point that many people ask, &quot;ok, but{' '}
-          <i>what is </i>
-          <Latex>$u \otimes v$</Latex>? What does it mean?&quot; It may be hard
-          to accept, but the truth is that the <Latex>$\otimes$</Latex> symbol
-          really doesn&apos;t <i>mean</i> anything -- it&apos;s just a glue
-          holding two vectors together. Treat it as a symbol that we manipulate
-          according to certain rules, and nothing more.
-          <sup>
-            <a id="footnote-5-ref" href="#footnote-5">
-              [5]
-            </a>
-          </sup>
-        </p>
-      </InfoBox>
       <p>
         Returning to our example, notice that{' '}
         <Latex>
@@ -265,13 +250,82 @@ export default function Writing() {
         <Latex>$U \otimes V$</Latex> is the <i>unique</i> space that gives us a{' '}
         <i>unique</i> agreeing linear map.
         <sup>
-          <a id="footnote-6-ref" href="#footnote-6">
-            [6]
+          <a id="footnote-5-ref" href="#footnote-5">
+            [5]
           </a>
         </sup>{' '}
         If we wanted, we could have a larger space containing{' '}
         <Latex>$U \otimes V$</Latex>, and we would certainly still have our
         linear map. But, it would no longer be unique.
+      </p>
+      <p>
+        The meaning of the <Latex>$\otimes$</Latex> symbol may still be a little
+        opaque, though; people will often ask &quot;ok, but what is{' '}
+        <Latex>$u \otimes v$</Latex> <i>really?</i>&nbsp; What&apos;s the{' '}
+        <Latex>$\otimes$</Latex> <i>doing?&quot;</i>
+      </p>
+      <h4>Example: The Cauchy Stress Tensor</h4>
+      <p>
+        In essence, the job of the <Latex>$\otimes$</Latex> is to emphasize the
+        relationship between its constituent vectors. The fact that{' '}
+        <Latex>$\lambda u \otimes v = u \otimes \lambda v$</Latex> isn&apos;t
+        just an algebraic rule; it tells us that we don&apos;t care where the{' '}
+        <Latex>$\lambda$</Latex> ends up. It doesn&apos;t belong to a vector, it
+        belongs to the <i>tensor</i>.
+      </p>
+      <p>
+        This fact is well-illustrated by the Cauchy stress tensor. To model
+        stress, we need two pieces of information: the force itself and the
+        direction of the surface it acts on (this allows us to differentiate
+        between shear vs. normal stress). However, we only want to keep track of
+        one magnitude, the strength of the stress. Encoding these objects as
+        tensors allows us to communicate that although there are two vectors
+        present, we only care about their &quot;shared&quot; magnitude.
+      </p>
+      <p>
+        This is also why tensors are able to turn bilinear functions into linear
+        ones. Bilinear functions allow the <Latex>$\lambda$</Latex> to move
+        around to any argument, and that&apos;s the <i>defining property</i> of
+        tensors. As we said before, it doesn&apos;t matter where the{' '}
+        <Latex>$\lambda$</Latex> ends up; it doesn&apos;t belong to any
+        individual argument, but to the tensor as a whole.
+      </p>
+      <h4>Addendum: Multilinearity</h4>
+      <p>
+        No discussion of tensors would be complete without the mention of
+        multilinearity. Multilinearity is essentially the property of the dot
+        product we discussed earlier, but extended to functions with any number
+        of arguments. Specifically, we have that coefficients can jump between
+        arguments,
+      </p>
+      <Latex>
+        $$\lambda f(v_1, \ldots, v_n)$$$$= f(\lambda v_1, \ldots, v_n) = f(v_1,
+        \ldots, \lambda v_n)$$
+      </Latex>
+      <p>and vectors in the same position can be added.</p>
+      <Latex>
+        $$f(\ldots, u + v, \ldots)$$$$= f(\ldots, u, \ldots) + f(\ldots, v,
+        \ldots)$$
+      </Latex>
+      <p>
+        We can apply the tensor product to multilinear functions just as easily,
+        allowing us to make any of them linear. We can even use the same
+        diagram!
+      </p>
+      <div className="flex justify-center">
+        <Image
+          src={universal4}
+          alt="Universal Property of Tensors, with Multilinearity"
+          className="w-72"
+        />
+      </div>
+      <p>
+        If you&apos;ve taken an intro linear algebra course, you&apos;ve already
+        worked with a multilinear function: the determinant. Remember, if you
+        scale any column of your matrix by <Latex>$\lambda$</Latex>, it scales
+        the whole determinant by <Latex>$\lambda$</Latex>. It&apos;s no surprise
+        that the determinant is used to model volume; multilinear functions are
+        generally great at this, due to their scaling behavior and additivity.
       </p>
       <div className="flex flex-row justify-center">
         <div className="w-[90%] h-[1px] bg-gray-400 mt-4" />
@@ -352,26 +406,13 @@ export default function Writing() {
           </ul>{' '}
         </li>
         <li id="footnote-5">
-          This attitude towards mathematics is called{' '}
-          <a
-            target="_blank"
-            href="https://en.wikipedia.org/wiki/Formalism_(philosophy_of_mathematics)"
-          >
-            formalism
-          </a>
-          , and it&apos;s been the predominant view held by mathematicians since
-          the mid-20th century. Essentially, it states that math is not
-          &quot;about&quot; anything at all, only moving around symbols.{' '}
-          <a href="#footnote-5-ref">&#8617;</a>
-        </li>
-        <li id="footnote-6">
           Unique up to a{' '}
           <a target="_blank" href="https://en.wikipedia.org/wiki/Isomorphism">
             relabeling
           </a>
           , of course. We could give each element of{' '}
           <Latex>$U \otimes V$</Latex> a new name and it would still be the same
-          thing. <a href="#footnote-6-ref">&#8617;</a>
+          thing. <a href="#footnote-5-ref">&#8617;</a>
         </li>
       </ol>
     </PageTemplate>
