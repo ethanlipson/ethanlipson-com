@@ -10,6 +10,13 @@ export default function Writing() {
     <PageTemplate highlightWriting>
       <h1>Writing</h1>
       <p>
+        September 23, 2023
+        <br />
+        <Link href="/writing/complex-3d">
+          <b>Where are the 3D complex numbers?</b>
+        </Link>
+      </p>
+      <p>
         September 6, 2023
         <br />
         <Link href="/writing/tensors">
@@ -19,7 +26,7 @@ export default function Writing() {
       <p>
         September 2, 2023
         <br />
-        <Link href="/writing/complex">
+        <Link href="/writing/complex-polynomials">
           <b>Complex Numbers are Secretly Polynomials</b>
         </Link>
       </p>

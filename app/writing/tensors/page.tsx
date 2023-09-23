@@ -336,26 +336,18 @@ export default function Writing() {
           element of truth to it. What&apos;s definitely true is that we have an
           extremely strong understanding of finite-dimensional linear algebra as
           presented in most introductory courses. Read{' '}
-          <a target="_blank" href="https://math.stackexchange.com/a/1700876">
-            this
-          </a>{' '}
-          Math Stack Exchange answer for more context.{' '}
+          <a href="https://math.stackexchange.com/a/1700876">this</a> Math Stack
+          Exchange answer for more context.{' '}
           <a href="#footnote-1-ref">&#8617;</a>
         </li>
         <li id="footnote-2">
           A diagram like this, where you can take any path you want and get the
           same answer, is called a{' '}
-          <a
-            target="_blank"
-            href="https://en.wikipedia.org/wiki/Commutative_diagram"
-          >
+          <a href="https://en.wikipedia.org/wiki/Commutative_diagram">
             commutative diagram
           </a>
           . They come from{' '}
-          <a
-            target="_blank"
-            href="https://en.wikipedia.org/wiki/Category_theory"
-          >
+          <a href="https://en.wikipedia.org/wiki/Category_theory">
             category theory
           </a>
           , a language that attempts to describe mathematics in the most
@@ -379,24 +371,15 @@ export default function Writing() {
             </li>
             <li>
               The tensor product can be constructed using{' '}
-              <a
-                target="_blank"
-                href="https://en.wikipedia.org/wiki/Quotient_space_(linear_algebra)"
-              >
+              <a href="https://en.wikipedia.org/wiki/Quotient_space_(linear_algebra)">
                 quotient spaces
               </a>
               , as described in{' '}
-              <a
-                target="_blank"
-                href="https://en.wikipedia.org/wiki/Tensor_product#As_a_quotient_space"
-              >
+              <a href="https://en.wikipedia.org/wiki/Tensor_product#As_a_quotient_space">
                 this article
               </a>{' '}
               and in{' '}
-              <a
-                target="_blank"
-                href="https://www.youtube.com/watch?v=K7f2pCQ3p3U"
-              >
+              <a href="https://www.youtube.com/watch?v=K7f2pCQ3p3U">
                 this excellent video
               </a>{' '}
               by Michael Penn. Such a construction has the advantage of not
@@ -407,12 +390,10 @@ export default function Writing() {
         </li>
         <li id="footnote-5">
           Unique up to a{' '}
-          <a target="_blank" href="https://en.wikipedia.org/wiki/Isomorphism">
-            relabeling
-          </a>
-          , of course. We could give each element of{' '}
-          <Latex>$U \otimes V$</Latex> a new name and it would still be the same
-          thing. <a href="#footnote-5-ref">&#8617;</a>
+          <a href="https://en.wikipedia.org/wiki/Isomorphism">relabeling</a>, of
+          course. We could give each element of <Latex>$U \otimes V$</Latex> a
+          new name and it would still be the same thing.{' '}
+          <a href="#footnote-5-ref">&#8617;</a>
         </li>
       </ol>
     </PageTemplate>

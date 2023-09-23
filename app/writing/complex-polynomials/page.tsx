@@ -303,11 +303,9 @@ export default function Writing() {
       <ol className="list-decimal flex flex-col gap-4 mx-8 text-sm">
         <li id="footnote-1">
           In the language of{' '}
-          <a target="_blank" href="https://en.wikipedia.org/wiki/Ring_theory">
-            ring theory
-          </a>
-          , <Latex>$\mathbb R[x]$</Latex> is actually read &quot;R adjoin
-          x&quot;, so the whole thing should be read &quot;R-adjoin-x mod
+          <a href="https://en.wikipedia.org/wiki/Ring_theory">ring theory</a>,{' '}
+          <Latex>$\mathbb R[x]$</Latex> is actually read &quot;R adjoin x&quot;,
+          so the whole thing should be read &quot;R-adjoin-x mod
           x-squared-plus-one&quot;. <a href="#footnote-1-ref">&#8617;</a>
         </li>
         <li id="footnote-2">
@@ -316,55 +314,35 @@ export default function Writing() {
           we generally call two mathematical structures isomorphic if they have
           the same shape, i.e. behave the same. Specifically, this isomorphism
           would be a{' '}
-          <a
-            target="_blank"
-            href="https://en.wikipedia.org/wiki/Ring_homomorphism"
-          >
+          <a href="https://en.wikipedia.org/wiki/Ring_homomorphism">
             ring isomorphism
           </a>
           . <a href="#footnote-2-ref">&#8617;</a>
         </li>
         <li id="footnote-3">
           This should actually be called an{' '}
-          <a
-            target="_blank"
-            href="https://en.wikipedia.org/wiki/Equivalence_relation"
-          >
+          <a href="https://en.wikipedia.org/wiki/Equivalence_relation">
             equivalence relation
           </a>
           . In general, a{' '}
-          <a
-            target="_blank"
-            href="https://en.wikipedia.org/wiki/Binary_relation"
-          >
-            relation
-          </a>{' '}
+          <a href="https://en.wikipedia.org/wiki/Binary_relation">relation</a>{' '}
           can really be anything we want, but equivalence relations have to
           follow three rules:{' '}
           <ul className="list-disc flex flex-col ml-8 my-4">
             <li>
-              <a
-                target="_blank"
-                href="https://en.wikipedia.org/wiki/Reflexive_relation"
-              >
+              <a href="https://en.wikipedia.org/wiki/Reflexive_relation">
                 Reflexivity
               </a>{' '}
               - For all <Latex>$x$</Latex>, <Latex>$x \sim x$</Latex>{' '}
             </li>
             <li>
-              <a
-                target="_blank"
-                href="https://en.wikipedia.org/wiki/Symmetric_relation"
-              >
+              <a href="https://en.wikipedia.org/wiki/Symmetric_relation">
                 Symmetry
               </a>{' '}
               - <Latex>$x \sim y$</Latex> implies <Latex>$y \sim x$</Latex>{' '}
             </li>
             <li>
-              <a
-                target="_blank"
-                href="https://en.wikipedia.org/wiki/Transitive_relation"
-              >
+              <a href="https://en.wikipedia.org/wiki/Transitive_relation">
                 Transitivity
               </a>{' '}
               - <Latex>$x \sim y$</Latex> and <Latex>$y \sim z$</Latex> implies{' '}
