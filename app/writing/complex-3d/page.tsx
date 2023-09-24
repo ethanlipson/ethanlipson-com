@@ -169,7 +169,8 @@ export default function Writing() {
           Most things that feel &quot;product-y&quot; are actually just
           bilinear. If you stop and think, it&apos;s not that clear what the
           cross product, dot product, tensor product, and matrix product have in
-          common; indeed, it&apos;s just that they&apos;re bilinear.
+          common; indeed, it&apos;s just that they&apos;re bilinear.{' '}
+          <a href="#footnote-1-ref">&#8617;</a>
         </li>
       </ol>
     </PageTemplate>
