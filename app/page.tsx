@@ -24,14 +24,17 @@ export default function Home() {
     <PageTemplate>
       <h1>Home</h1>
       <p>
-        I&apos;m Ethan Lipson, sophomore at Columbia University and Stuyvesant
-        High School alumnus studying mathematics.
+        I&apos;m a sophomore at Columbia interested in both pure and applied
+        mathematics.
       </p>
       <p>
-        I take pride in my programming ability, specifically in my knowledge of
+        I take pride in my programming ability, in particular my knowledge of
         parallel GPU computation. It&apos;s the secret ingredient that allows me
-        to take my understanding of advanced math and turn it into real,
-        tangible software -- check out my projects to see.
+        to turn my understanding of advanced math into real, tangible software.
+      </p>
+      <p>
+        I have beaten the most highly decorated International Math Olympiad gold
+        medalist at poker.
       </p>
       <p>
         View my resume <Link href="/resume.pdf">here</Link>.

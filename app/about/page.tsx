@@ -15,7 +15,10 @@ export default function About() {
         </Link>
       </p>
       <p>
-        My <Link href="/resume.pdf">resume</Link>
+        <Link href="/resume.pdf">Resume</Link>
+      </p>
+      <p>
+        <Link href="https://www.linkedin.com/in/ethan-lipson/">LinkedIn</Link>
       </p>
     </PageTemplate>
   );
