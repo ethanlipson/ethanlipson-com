@@ -10,17 +10,24 @@ export default function Writing() {
     <PageTemplate highlightWriting>
       <h1>Writing</h1>
       <p>
+        November 19, 2023
+        <br />
+        <Link href="/writing/counting">
+          <b>How to Count</b>
+        </Link>
+      </p>
+      <p>
         September 23, 2023
         <br />
         <Link href="/writing/complex-3d">
-          <b>Where are the 3D complex numbers?</b>
+          <b>Where are the 3D Complex Numbers?</b>
         </Link>
       </p>
       <p>
         September 6, 2023
         <br />
         <Link href="/writing/tensors">
-          <b>What the **** is a tensor?</b>
+          <b>What the **** is a Tensor?</b>
         </Link>
       </p>
       <p>

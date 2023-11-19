@@ -9,7 +9,7 @@ import Latex from 'react-latex-next';
 export default function Writing() {
   return (
     <PageTemplate highlightWriting>
-      <h3>Where are the 3D complex numbers?</h3>
+      <h3>Where are the 3D Complex Numbers?</h3>
       <h5>September 23, 2023</h5>
       <p>
         It&apos;s a natural question. We learn about the number line in

@@ -14,7 +14,7 @@ import Image from 'next/image';
 export default function Writing() {
   return (
     <PageTemplate highlightWriting>
-      <h3>What the **** is a tensor?</h3>
+      <h3>What the **** is a Tensor?</h3>
       <h5>September 6, 2023</h5>
       <p>
         A computer scientist will tell you that a tensor is a multidimensional
