@@ -28,9 +28,10 @@ export default function Home() {
         mathematics.
       </p>
       <p>
-        I take pride in my programming ability, in particular my knowledge of
-        parallel GPU computation. It&apos;s what allows me to turn my
-        understanding of advanced math into real, tangible software.
+        These demos are made possible by GPU parallelization, allowing
+        computations to be performed hundreds of times faster than usual.
+        It&apos;s what allows me to turn a passion for math into real, tangible
+        software.
       </p>
       <p>
         I have beaten the most highly decorated International Math Olympiad gold
