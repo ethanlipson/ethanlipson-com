@@ -10,6 +10,13 @@ export default function Writing() {
     <PageTemplate highlightWriting>
       <h1>Writing</h1>
       <p>
+        January 31, 2024
+        <br />
+        <Link href="/writing/measure">
+          <b>Continuity of Measure</b>
+        </Link>
+      </p>
+      <p>
         November 19, 2023
         <br />
         <Link href="/writing/counting">
