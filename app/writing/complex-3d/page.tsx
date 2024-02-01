@@ -65,7 +65,7 @@ export default function Writing() {
         </li>
       </ul>
       <p>
-        In every case, we can&apos;t come up with a resonable value for{' '}
+        In every case, we can&apos;t come up with a reasonable value for{' '}
         <Latex>$ij$</Latex>. What we really have to do is create a fourth
         symbol, <Latex>$k$</Latex>, and set <Latex>$ij = k$</Latex> -- if
         you&apos;ve heard of the quaternions, that&apos;s what we&apos;re doing
@@ -131,8 +131,8 @@ export default function Writing() {
         1877, Ferdinand Georg Frobenius proved that the only algebras following
         the four rules listed earlier are <Latex>$\mathbb R$</Latex> and{' '}
         <Latex>$\mathbb C$</Latex>. If we drop the commutativity requirement, we
-        also get the quaternions <Latex>$H$</Latex>, but that&apos;s it. Any
-        other algebra will break one of those four rules.
+        also get the quaternions <Latex>$\mathbb H$</Latex>, but that&apos;s it.
+        Any other algebra will break one of those four rules.
       </p>
       <InfoBox title="Faulty Algebras">
         <p>
