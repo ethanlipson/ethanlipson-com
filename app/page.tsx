@@ -24,8 +24,11 @@ export default function Home() {
     <PageTemplate>
       <h1>Home</h1>
       <p>
-        I&apos;m a sophomore at Columbia interested in both pure and applied
-        mathematics.
+        I&apos;m a rising junior at Columbia studying Applied Math. I&apos;m
+        currently conducting research with Changxi Zheng on differentiable fluid
+        simulation, with the goal of massively speeding up the design of
+        vehicles with aero/hydrodynamic properties like airplanes, cars, and
+        submarines.
       </p>
       <p>
         These demos are made possible by GPU parallelization, allowing
