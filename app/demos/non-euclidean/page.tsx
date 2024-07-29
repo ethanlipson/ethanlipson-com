@@ -8,9 +8,9 @@ export default function NonEuclidean() {
     <DemoTemplate demo={<Demo />}>
       <h1>Non-Euclidean Worlds</h1>
       <p>
-        A world where the shortest distance between two points may not be a
-        straight line. Inspired by CodeParade&apos;s video on the same topic.
-        Try walking between the arches!
+        A recreation of CodeParade&apos;s video on the same subject, this is a
+        world where the shortest distance between two points may not be a
+        straight line. Try walking between the arches!
       </p>
       <h3>Controls</h3>
       <p>
