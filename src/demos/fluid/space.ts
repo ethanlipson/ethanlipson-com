@@ -17,7 +17,7 @@ const COLLISION_RESTITUTION = 0.0;
 
 const MIN_X = -4;
 const MAX_X = 4;
-const MIN_Y = -2;
+const MIN_Y = -3;
 const MAX_Y = 2;
 const MIN_Z = -2;
 const MAX_Z = 2;
@@ -25,13 +25,15 @@ const MAX_Z = 2;
 const NUM_TILES_X = 50;
 const NUM_TILES_Y = 10;
 const NUM_TILES_Z = 20;
-const TILE_SCALE = 1.0;
 
 const MAX_TEXTURE_WIDTH = 1024;
 
 const TENSION_KERNEL =
   (315 / (64 * Math.PI * Math.pow(KERNEL_RADIUS, 9))) *
-  Math.pow(KERNEL_RADIUS * KERNEL_RADIUS - TENSION_DELTA_Q * TENSION_DELTA_Q, 3);
+  Math.pow(
+    KERNEL_RADIUS * KERNEL_RADIUS - TENSION_DELTA_Q * TENSION_DELTA_Q,
+    3
+  );
 
 const NUM_CELLS_X = Math.ceil((MAX_X - MIN_X) / KERNEL_RADIUS) + 2;
 const NUM_CELLS_Y = Math.ceil((MAX_Y - MIN_Y) / KERNEL_RADIUS) + 2;
@@ -380,6 +382,13 @@ const applyDeltaPFragmentShader = `#version 300 es
     vec3 nextPosition = texelFetch(particleNextPositions, ivec2(gl_FragCoord.xy), 0).xyz;
     vec3 deltaP = texelFetch(particleDeltaPs, ivec2(gl_FragCoord.xy), 0).xyz;
 
+    ivec2 nextParticleId = ivec2(gl_FragCoord.xy) + ivec2(1, 0);
+    if (nextParticleId.x >= ${MAX_TEXTURE_WIDTH}) {
+      nextParticleId.x = 0;
+      nextParticleId.y++;
+    }
+    vec3 neighborPosition = texelFetch(particlePositions, nextParticleId, 0).xyz;
+
     nextPosition += deltaP;
 
     if (nextPosition.x > float(${MAX_X}) || nextPosition.x < float(${MIN_X})) {
@@ -390,6 +399,22 @@ const applyDeltaPFragmentShader = `#version 300 es
     }
     if (nextPosition.z > float(${MAX_Z}) || nextPosition.z < float(${MIN_Z})) {
       nextPosition.z = position.z + float(${COLLISION_RESTITUTION}) * (position.z - nextPosition.z);
+    }
+    
+    if (nextPosition.x >= -0.5 && position.y >= 0.0 && nextPosition.y < 0.0) {
+      nextPosition.y = position.y + float(${COLLISION_RESTITUTION}) * (position.y - nextPosition.y);
+    }
+    if (nextPosition.x <= 0.5 && position.y >= -2.0 && nextPosition.y < -2.0) {
+      nextPosition.y = position.y + float(${COLLISION_RESTITUTION}) * (position.y - nextPosition.y);
+    }
+
+    if (nextPosition.y <= -2.85) {
+      nextPosition.y += 4.85;
+      // nextPosition -= vec3(0.5, -3.0, 0.0);
+      // nextPosition = vec3(-nextPosition.y, nextPosition.x, nextPosition.z);
+      // nextPosition += vec3(-3.85, -2.0, 0.0);
+      // nextPosition.y = (0.5 - nextPosition.y) * 0.5 + nextPosition.y;
+      // nextPosition.z *= 0.5;
     }
 
     particleNextPositionCopy = vec4(nextPosition, 1.0);
@@ -411,7 +436,19 @@ const updateVelocityFragmentShader = `#version 300 es
     vec3 position = texelFetch(particlePositions, ivec2(gl_FragCoord.xy), 0).xyz;
     vec3 nextPosition = texelFetch(particleNextPositions, ivec2(gl_FragCoord.xy), 0).xyz;
 
+    bool teleported = false;
+    if (nextPosition.y >= -1.0 && position.y < -2.0) {
+      position.y += 4.85;
+      // position -= vec3(0.5, -3.0, 0.0);
+      // position = vec3(-position.y, position.x, position.z);
+      // position += vec3(-3.85, -2.0, 0.0);
+      // position.y = (0.5 - position.y) * 0.5 + position.y;
+      // position.z *= 0.5;
+      // teleported = true;
+    }
+
     vec3 velocity = (nextPosition - position) / dt;
+    if (teleported) velocity = vec3(6.0, 3.0, 0.0);
     particleVelocity = vec4(velocity, 1.0);
   }
 `;
@@ -1213,7 +1250,8 @@ class Space {
       const cellY = Math.floor((y - MIN_Y) / KERNEL_RADIUS) + 1;
       const cellZ = Math.floor((z - MIN_Z) / KERNEL_RADIUS) + 1;
 
-      const hash = cellX * NUM_CELLS_Y * NUM_CELLS_Z + cellY * NUM_CELLS_Z + cellZ;
+      const hash =
+        cellX * NUM_CELLS_Y * NUM_CELLS_Z + cellY * NUM_CELLS_Z + cellZ;
       hashes.push([i, hash]);
     }
 
@@ -1329,13 +1367,22 @@ class Space {
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, this.particleNextPositionsFBO);
     this.predictPositionShader.use(gl);
-    gl.uniform1f(gl.getUniformLocation(this.predictPositionShader.program, 'dt'), dt);
+    gl.uniform1f(
+      gl.getUniformLocation(this.predictPositionShader.program, 'dt'),
+      dt
+    );
     gl.uniform1i(
-      gl.getUniformLocation(this.predictPositionShader.program, 'particlePositions'),
+      gl.getUniformLocation(
+        this.predictPositionShader.program,
+        'particlePositions'
+      ),
       10
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.predictPositionShader.program, 'particleVelocities'),
+      gl.getUniformLocation(
+        this.predictPositionShader.program,
+        'particleVelocities'
+      ),
       11
     );
     gl.drawArrays(gl.TRIANGLES, 0, 6);
@@ -1343,15 +1390,24 @@ class Space {
     gl.bindFramebuffer(gl.FRAMEBUFFER, this.particleDensitiesFBO);
     this.calculateDensityShader.use(gl);
     gl.uniform1i(
-      gl.getUniformLocation(this.calculateDensityShader.program, 'numParticles'),
+      gl.getUniformLocation(
+        this.calculateDensityShader.program,
+        'numParticles'
+      ),
       this.numParticles
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.calculateDensityShader.program, 'particlePositions'),
+      gl.getUniformLocation(
+        this.calculateDensityShader.program,
+        'particlePositions'
+      ),
       10
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.calculateDensityShader.program, 'cellStartIndices'),
+      gl.getUniformLocation(
+        this.calculateDensityShader.program,
+        'cellStartIndices'
+      ),
       9
     );
     gl.drawArrays(gl.TRIANGLES, 0, 6);
@@ -1363,15 +1419,24 @@ class Space {
       this.numParticles
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.calculateLambdaShader.program, 'particlePositions'),
+      gl.getUniformLocation(
+        this.calculateLambdaShader.program,
+        'particlePositions'
+      ),
       10
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.calculateLambdaShader.program, 'particleDensities'),
+      gl.getUniformLocation(
+        this.calculateLambdaShader.program,
+        'particleDensities'
+      ),
       4
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.calculateLambdaShader.program, 'cellStartIndices'),
+      gl.getUniformLocation(
+        this.calculateLambdaShader.program,
+        'cellStartIndices'
+      ),
       9
     );
     gl.drawArrays(gl.TRIANGLES, 0, 6);
@@ -1383,15 +1448,24 @@ class Space {
       this.numParticles
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.calculateDeltaPShader.program, 'particlePositions'),
+      gl.getUniformLocation(
+        this.calculateDeltaPShader.program,
+        'particlePositions'
+      ),
       10
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.calculateDeltaPShader.program, 'particleLambdas'),
+      gl.getUniformLocation(
+        this.calculateDeltaPShader.program,
+        'particleLambdas'
+      ),
       5
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.calculateDeltaPShader.program, 'cellStartIndices'),
+      gl.getUniformLocation(
+        this.calculateDeltaPShader.program,
+        'cellStartIndices'
+      ),
       9
     );
     gl.drawArrays(gl.TRIANGLES, 0, 6);
@@ -1399,11 +1473,17 @@ class Space {
     gl.bindFramebuffer(gl.FRAMEBUFFER, this.particleCopyBufferFBO);
     this.applyDeltaPShader.use(gl);
     gl.uniform1i(
-      gl.getUniformLocation(this.applyDeltaPShader.program, 'particlePositions'),
+      gl.getUniformLocation(
+        this.applyDeltaPShader.program,
+        'particlePositions'
+      ),
       10
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.applyDeltaPShader.program, 'particleNextPositions'),
+      gl.getUniformLocation(
+        this.applyDeltaPShader.program,
+        'particleNextPositions'
+      ),
       3
     );
     gl.uniform1i(
@@ -1425,13 +1505,22 @@ class Space {
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, this.sortedParticleVelocitiesFBO);
     this.updateVelocityShader.use(gl);
-    gl.uniform1f(gl.getUniformLocation(this.updateVelocityShader.program, 'dt'), dt);
+    gl.uniform1f(
+      gl.getUniformLocation(this.updateVelocityShader.program, 'dt'),
+      dt
+    );
     gl.uniform1i(
-      gl.getUniformLocation(this.updateVelocityShader.program, 'particlePositions'),
+      gl.getUniformLocation(
+        this.updateVelocityShader.program,
+        'particlePositions'
+      ),
       10
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.updateVelocityShader.program, 'particleNextPositions'),
+      gl.getUniformLocation(
+        this.updateVelocityShader.program,
+        'particleNextPositions'
+      ),
       3
     );
     gl.drawArrays(gl.TRIANGLES, 0, 6);
@@ -1443,15 +1532,24 @@ class Space {
       this.numParticles
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.applyViscosityShader.program, 'particlePositions'),
+      gl.getUniformLocation(
+        this.applyViscosityShader.program,
+        'particlePositions'
+      ),
       10
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.applyViscosityShader.program, 'particleVelocities'),
+      gl.getUniformLocation(
+        this.applyViscosityShader.program,
+        'particleVelocities'
+      ),
       11
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.applyViscosityShader.program, 'cellStartIndices'),
+      gl.getUniformLocation(
+        this.applyViscosityShader.program,
+        'cellStartIndices'
+      ),
       9
     );
     gl.drawArrays(gl.TRIANGLES, 0, 6);
@@ -1474,40 +1572,64 @@ class Space {
       this.numParticles
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.calculateOmegaShader.program, 'particlePositions'),
+      gl.getUniformLocation(
+        this.calculateOmegaShader.program,
+        'particlePositions'
+      ),
       10
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.calculateOmegaShader.program, 'particleVelocities'),
+      gl.getUniformLocation(
+        this.calculateOmegaShader.program,
+        'particleVelocities'
+      ),
       11
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.calculateOmegaShader.program, 'cellStartIndices'),
+      gl.getUniformLocation(
+        this.calculateOmegaShader.program,
+        'cellStartIndices'
+      ),
       9
     );
     gl.drawArrays(gl.TRIANGLES, 0, 6);
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, this.particleCopyBufferFBO);
     this.applyVorticityShader.use(gl);
-    gl.uniform1f(gl.getUniformLocation(this.applyVorticityShader.program, 'dt'), dt);
+    gl.uniform1f(
+      gl.getUniformLocation(this.applyVorticityShader.program, 'dt'),
+      dt
+    );
     gl.uniform1i(
       gl.getUniformLocation(this.applyVorticityShader.program, 'numParticles'),
       this.numParticles
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.applyVorticityShader.program, 'particlePositions'),
+      gl.getUniformLocation(
+        this.applyVorticityShader.program,
+        'particlePositions'
+      ),
       10
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.applyVorticityShader.program, 'particleVelocities'),
+      gl.getUniformLocation(
+        this.applyVorticityShader.program,
+        'particleVelocities'
+      ),
       11
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.applyVorticityShader.program, 'particleOmegas'),
+      gl.getUniformLocation(
+        this.applyVorticityShader.program,
+        'particleOmegas'
+      ),
       7
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.applyVorticityShader.program, 'cellStartIndices'),
+      gl.getUniformLocation(
+        this.applyVorticityShader.program,
+        'cellStartIndices'
+      ),
       9
     );
     gl.drawArrays(gl.TRIANGLES, 0, 6);
@@ -1552,51 +1674,233 @@ class Space {
       gl,
       projection,
       view,
-      mat4.multiply(
+      mat4.scale(
         mat4.create(),
-        model,
-        mat4.translate(
-          mat4.create(),
-          mat4.scale(
-            mat4.create(),
-            mat4.translate(mat4.create(), mat4.create(), [0, MIN_Y, 0]),
-            [TILE_SCALE, 1, TILE_SCALE]
-          ),
-          [-NUM_TILES_X / 2, 0, MIN_Z / TILE_SCALE]
-        )
+        mat4.translate(mat4.create(), model, [-25, MIN_Y, MIN_Z]),
+        [0.5, 1, 0.5]
       ),
       lightPos,
-      NUM_TILES_X,
-      NUM_TILES_Z
+      51,
+      40
     );
     this.tileRenderer.render(
       gl,
       projection,
       view,
-      mat4.multiply(
+      mat4.scale(
         mat4.create(),
-        model,
-        mat4.translate(
-          mat4.create(),
-          mat4.scale(
-            mat4.create(),
-            mat4.rotateX(
-              mat4.create(),
-              mat4.translate(mat4.create(), mat4.create(), [0, MIN_Y, MIN_Z]),
-              -Math.PI / 2
-            ),
-            [TILE_SCALE, 1, TILE_SCALE]
-          ),
-          [-NUM_TILES_X / 2, 0, 0]
-        )
+        mat4.translate(mat4.create(), model, [0.5, MIN_Y, MAX_Z]),
+        [0.5, 1, 0.5]
       ),
       lightPos,
-      NUM_TILES_X,
-      NUM_TILES_Y,
+      7,
+      32,
       true
     );
+    this.tileRenderer.render(
+      gl,
+      projection,
+      view,
+      mat4.scale(
+        mat4.create(),
+        mat4.translate(mat4.create(), model, [4, MIN_Y, MIN_Z]),
+        [0.5, 1, 0.5]
+      ),
+      lightPos,
+      42,
+      40
+    );
+    this.tileRenderer.render(
+      gl,
+      projection,
+      view,
+      mat4.scale(
+        mat4.create(),
+        mat4.rotateX(
+          mat4.create(),
+          mat4.translate(mat4.create(), model, [-50 / 2, MIN_Y, MIN_Z]),
+          -Math.PI / 2
+        ),
+        [0.5, 1, 0.5]
+      ),
+      lightPos,
+      100,
+      20,
+      true
+    );
+    this.tileRenderer.render(
+      gl,
+      projection,
+      view,
+      mat4.scale(
+        mat4.create(),
+        mat4.translate(mat4.create(), model, [-0.5, -1, -2]),
+        [0.25, 1, 0.25]
+      ),
+      lightPos,
+      18,
+      16
+    );
+    this.tileRenderer.render(
+      gl,
+      projection,
+      view,
+      mat4.scale(
+        mat4.create(),
+        mat4.translate(mat4.create(), model, [-0.5, -1.25, -2]),
+        [0.25, 1, 0.25]
+      ),
+      lightPos,
+      18,
+      16
+    );
+    this.tileRenderer.render(
+      gl,
+      projection,
+      view,
+      mat4.scale(
+        mat4.create(),
+        mat4.rotateX(
+          mat4.create(),
+          mat4.translate(mat4.create(), model, [-0.5, -1, 2]),
+          Math.PI / 2
+        ),
+        [0.25, 1, 0.25]
+      ),
+      lightPos,
+      18,
+      1,
+      true
+    );
+    this.tileRenderer.render(
+      gl,
+      projection,
+      view,
+      mat4.scale(
+        mat4.create(),
+        mat4.rotateZ(
+          mat4.create(),
+          mat4.translate(mat4.create(), model, [-0.5, -1.25, -2]),
+          Math.PI / 2
+        ),
+        [0.25, 1, 0.25]
+      ),
+      lightPos,
+      1,
+      16
+    );
+    this.tileRenderer.render(
+      gl,
+      projection,
+      view,
+      mat4.scale(
+        mat4.create(),
+        mat4.rotateZ(
+          mat4.create(),
+          mat4.translate(mat4.create(), model, [4, -1.25, -2]),
+          Math.PI / 2
+        ),
+        [0.25, 1, 0.25]
+      ),
+      lightPos,
+      1,
+      16,
+      true
+    );
+    this.tileRenderer.render(
+      gl,
+      projection,
+      view,
+      mat4.scale(
+        mat4.create(),
+        mat4.rotateX(
+          mat4.create(),
+          mat4.translate(mat4.create(), model, [0.5, MIN_Y, MIN_Z]),
+          Math.PI / 2
+        ),
+        [0.5, 1, 0.5]
+      ),
+      lightPos,
+      7,
+      2,
+      true
+    );
+    this.tileRenderer.render(
+      gl,
+      projection,
+      view,
+      mat4.scale(
+        mat4.create(),
+        mat4.rotateX(
+          mat4.create(),
+          mat4.translate(mat4.create(), model, [0.5, MIN_Y, MAX_Z]),
+          Math.PI / 2
+        ),
+        [0.5, 1, 0.5]
+      ),
+      lightPos,
+      7,
+      2,
+      true
+    );
+    this.tileRenderer.render(
+      gl,
+      projection,
+      view,
+      mat4.scale(
+        mat4.create(),
+        mat4.rotateZ(
+          mat4.create(),
+          mat4.translate(mat4.create(), model, [0.5, -4, MIN_Z]),
+          Math.PI / 2
+        ),
+        [0.5, 1, 0.5]
+      ),
+      lightPos,
+      2,
+      8,
+      true
+    );
+    this.tileRenderer.render(
+      gl,
+      projection,
+      view,
+      mat4.scale(
+        mat4.create(),
+        mat4.rotateZ(
+          mat4.create(),
+          mat4.translate(mat4.create(), model, [4, MIN_Y - 1, MIN_Z]),
+          Math.PI / 2
+        ),
+        [0.5, 1, 0.5]
+      ),
+      lightPos,
+      2,
+      8,
+      true
+    );
+    this.tileRenderer.render(
+      gl,
+      projection,
+      view,
+      mat4.scale(
+        mat4.create(),
+        mat4.translate(mat4.create(), model, [0.5, MIN_Y - 1, MIN_Z]),
+        [0.5, 1, 0.5]
+      ),
+      lightPos,
+      7,
+      8
+    );
 
-    this.fluidRenderer.render(gl, projection, view, model, lightPos, this.numParticles);
+    this.fluidRenderer.render(
+      gl,
+      projection,
+      view,
+      mat4.translate(mat4.create(), model, [0, -1, 0]),
+      lightPos,
+      this.numParticles
+    );
   }
 }
 

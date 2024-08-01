@@ -15,13 +15,14 @@ uniform mat4 view;
 uniform mat4 model;
 
 uniform int numTilesX;
+uniform int numTilesZ;
 
 out vec3 fragPos;
 flat out int oddEven;
 
 void main() {
   int tileZ = gl_InstanceID / numTilesX;
-  oddEven = (gl_InstanceID + tileZ) % 2;
+  oddEven = (gl_InstanceID + (numTilesX % 2 == 1 || numTilesZ % 2 == 1 ? 0 : tileZ)) % 2;
 
   vec3 offset = vec3(gl_InstanceID % numTilesX, 0, tileZ);
   gl_Position = projection * view * model * vec4(position + offset, 1.0);
@@ -51,6 +52,10 @@ void main() {
   }
   else {
     objectColor = vec3(0.8, 0.8, 0.8);
+  }
+
+  if (fragPos.y < -3.0) {
+    objectColor = mix(objectColor, vec3(0.0), 1.0 - (fragPos.y - -3.85) / 0.85);
   }
 
   float ambientStrength = 0.1;
@@ -88,7 +93,11 @@ class TileRenderer {
 
     this.tileVertexBuffer = gl.createBuffer()!;
     gl.bindBuffer(gl.ARRAY_BUFFER, this.tileVertexBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.tileVertices), gl.STATIC_DRAW);
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array(this.tileVertices),
+      gl.STATIC_DRAW
+    );
     gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(0);
 
@@ -123,11 +132,23 @@ class TileRenderer {
       false,
       model
     );
-    gl.uniform3f(gl.getUniformLocation(this.tileShader.program, 'normal'), 0, 1, 0);
-    gl.uniform3fv(gl.getUniformLocation(this.tileShader.program, 'lightPos'), lightPos);
+    gl.uniform3f(
+      gl.getUniformLocation(this.tileShader.program, 'normal'),
+      0,
+      1,
+      0
+    );
+    gl.uniform3fv(
+      gl.getUniformLocation(this.tileShader.program, 'lightPos'),
+      lightPos
+    );
     gl.uniform1i(
       gl.getUniformLocation(this.tileShader.program, 'numTilesX'),
       numTilesX
+    );
+    gl.uniform1i(
+      gl.getUniformLocation(this.tileShader.program, 'numTilesZ'),
+      numTilesZ
     );
     gl.uniform1i(
       gl.getUniformLocation(this.tileShader.program, 'swapColors'),

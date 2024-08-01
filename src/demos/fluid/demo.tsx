@@ -50,8 +50,8 @@ const Demo: React.FC = () => {
       if (!paused.current) {
         for (let i = 0; i < 75; i++) {
           space.current.addParticle(
-            [Math.random() - 1, Math.random(), Math.random()],
-            [10, 0, 0]
+            [2.4 + Math.random() * 0.5, 2, Math.random() * 2 - 1],
+            [6, -6, 0]
           );
         }
         space.current.step(gl, 0.0167);
@@ -93,7 +93,10 @@ const Demo: React.FC = () => {
         onClick={() => canvas.current?.requestPointerLock()}
         onMouseMove={event => {
           if (document.pointerLockElement === canvas.current) {
-            camera.current.processMouseMovement(event.movementX, -event.movementY);
+            camera.current.processMouseMovement(
+              event.movementX,
+              -event.movementY
+            );
           }
         }}
         onKeyDown={event => {

@@ -299,7 +299,7 @@ const fluidFragmentShader = `#version 300 es
     float fresnelResult = fresnel(max(dot(normal, viewDir), 0.3));
     vec3 refracted = vec3(0.0, 0.2, 0.6) * (1.0 - fresnelResult);
     vec3 reflected = vec3(0.6, 0.6, 0.6) * fresnelResult;
-    vec3 specular = vec3(1.0, 1.0, 1.0) * pow(max(dot(normal, halfway), 0.0), 20.0);
+    vec3 specular = vec3(0.4, 0.4, 0.4) * pow(max(dot(normal, halfway), 0.0), 5.0);
     
     float thickness = getThickness(gl_FragCoord.xy);
     float alpha = 1.0 - exp(-0.1 * thickness);
@@ -388,7 +388,11 @@ class SmoothRenderer {
     /***************** Creating the sphere vertices *****************/
 
     this.particleSphereVertices = [];
-    const pushCartesian = (radius: number, azimuth: number, elevation: number) => {
+    const pushCartesian = (
+      radius: number,
+      azimuth: number,
+      elevation: number
+    ) => {
       this.particleSphereVertices.push(
         radius * Math.cos(azimuth) * Math.sin(elevation)
       );
@@ -401,14 +405,26 @@ class SmoothRenderer {
     const azimuthStep = (Math.PI * 2) / SPHERE_ITERATIONS / 2;
     const elevationStep = Math.PI / SPHERE_ITERATIONS;
     for (let azimuth = 0; azimuth <= Math.PI * 2; azimuth += azimuthStep) {
-      for (let elevation = 0; elevation <= Math.PI; elevation += elevationStep) {
+      for (
+        let elevation = 0;
+        elevation <= Math.PI;
+        elevation += elevationStep
+      ) {
         pushCartesian(SPHERE_RADIUS, azimuth, elevation);
         pushCartesian(SPHERE_RADIUS, azimuth + azimuthStep, elevation);
-        pushCartesian(SPHERE_RADIUS, azimuth + azimuthStep, elevation + elevationStep);
+        pushCartesian(
+          SPHERE_RADIUS,
+          azimuth + azimuthStep,
+          elevation + elevationStep
+        );
 
         pushCartesian(SPHERE_RADIUS, azimuth, elevation);
         pushCartesian(SPHERE_RADIUS, azimuth, elevation + elevationStep);
-        pushCartesian(SPHERE_RADIUS, azimuth + azimuthStep, elevation + elevationStep);
+        pushCartesian(
+          SPHERE_RADIUS,
+          azimuth + azimuthStep,
+          elevation + elevationStep
+        );
       }
     }
 
@@ -590,7 +606,11 @@ class SmoothRenderer {
     );
 
     this.viewShader = new Shader(gl, viewVertexShader, viewFragmentShader);
-    this.normalShader = new Shader(gl, fullscreenVertexShader, normalFragmentShader);
+    this.normalShader = new Shader(
+      gl,
+      fullscreenVertexShader,
+      normalFragmentShader
+    );
     this.smoothingShader = new Shader(
       gl,
       fullscreenVertexShader,
@@ -606,7 +626,11 @@ class SmoothRenderer {
       fullscreenVertexShader,
       thicknessSmoothingFragmentShader
     );
-    this.fluidShader = new Shader(gl, fullscreenVertexShader, fluidFragmentShader);
+    this.fluidShader = new Shader(
+      gl,
+      fullscreenVertexShader,
+      fluidFragmentShader
+    );
   }
 
   render(
@@ -697,7 +721,10 @@ class SmoothRenderer {
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, this.normalTextureFBO);
     this.normalShader.use(gl);
-    gl.uniform1i(gl.getUniformLocation(this.normalShader.program, 'viewTexture'), 20);
+    gl.uniform1i(
+      gl.getUniformLocation(this.normalShader.program, 'viewTexture'),
+      20
+    );
     gl.uniform1f(
       gl.getUniformLocation(this.normalShader.program, 'screenWidth'),
       gl.canvas.width
@@ -740,15 +767,24 @@ class SmoothRenderer {
     gl.clear(gl.COLOR_BUFFER_BIT);
     this.thicknessSmoothingShader.use(gl);
     gl.uniform1i(
-      gl.getUniformLocation(this.thicknessSmoothingShader.program, 'thicknessTexture'),
+      gl.getUniformLocation(
+        this.thicknessSmoothingShader.program,
+        'thicknessTexture'
+      ),
       23
     );
     gl.uniform1f(
-      gl.getUniformLocation(this.thicknessSmoothingShader.program, 'screenWidth'),
+      gl.getUniformLocation(
+        this.thicknessSmoothingShader.program,
+        'screenWidth'
+      ),
       gl.canvas.width
     );
     gl.uniform1f(
-      gl.getUniformLocation(this.thicknessSmoothingShader.program, 'screenHeight'),
+      gl.getUniformLocation(
+        this.thicknessSmoothingShader.program,
+        'screenHeight'
+      ),
       gl.canvas.height
     );
     gl.uniform2f(
@@ -763,15 +799,24 @@ class SmoothRenderer {
     gl.clear(gl.COLOR_BUFFER_BIT);
     this.thicknessSmoothingShader.use(gl);
     gl.uniform1i(
-      gl.getUniformLocation(this.thicknessSmoothingShader.program, 'thicknessTexture'),
+      gl.getUniformLocation(
+        this.thicknessSmoothingShader.program,
+        'thicknessTexture'
+      ),
       24
     );
     gl.uniform1f(
-      gl.getUniformLocation(this.thicknessSmoothingShader.program, 'screenWidth'),
+      gl.getUniformLocation(
+        this.thicknessSmoothingShader.program,
+        'screenWidth'
+      ),
       gl.canvas.width
     );
     gl.uniform1f(
-      gl.getUniformLocation(this.thicknessSmoothingShader.program, 'screenHeight'),
+      gl.getUniformLocation(
+        this.thicknessSmoothingShader.program,
+        'screenHeight'
+      ),
       gl.canvas.height
     );
     gl.uniform2f(
@@ -784,8 +829,14 @@ class SmoothRenderer {
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     this.fluidShader.use(gl);
-    gl.uniform1i(gl.getUniformLocation(this.fluidShader.program, 'viewTexture'), 20);
-    gl.uniform1i(gl.getUniformLocation(this.fluidShader.program, 'normalTexture'), 22);
+    gl.uniform1i(
+      gl.getUniformLocation(this.fluidShader.program, 'viewTexture'),
+      20
+    );
+    gl.uniform1i(
+      gl.getUniformLocation(this.fluidShader.program, 'normalTexture'),
+      22
+    );
     gl.uniform1i(
       gl.getUniformLocation(this.fluidShader.program, 'thicknessTexture'),
       23

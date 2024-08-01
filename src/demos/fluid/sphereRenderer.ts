@@ -44,6 +44,10 @@ vec3 lightColor = vec3(1.0, 1.0, 1.0);
 vec3 objectColor = vec3(0.0, 0.635, 1.0);
 
 void main() {
+  if (fragPos.y < -3.0) {
+    objectColor = mix(objectColor, vec3(0.0), 1.0 - (fragPos.y - -3.85) / 0.85);
+  }
+  
   float ambientStrength = 0.1;
   vec3 ambient = ambientStrength * lightColor;
 
@@ -65,7 +69,11 @@ class SphereRenderer {
     /***************** Creating the sphere vertices *****************/
 
     this.particleSphereVertices = [];
-    const pushCartesian = (radius: number, azimuth: number, elevation: number) => {
+    const pushCartesian = (
+      radius: number,
+      azimuth: number,
+      elevation: number
+    ) => {
       this.particleSphereVertices.push(
         radius * Math.cos(azimuth) * Math.sin(elevation)
       );
@@ -78,14 +86,26 @@ class SphereRenderer {
     const azimuthStep = (Math.PI * 2) / SPHERE_ITERATIONS;
     const elevationStep = Math.PI / SPHERE_ITERATIONS;
     for (let azimuth = 0; azimuth <= Math.PI * 2; azimuth += azimuthStep) {
-      for (let elevation = 0; elevation <= Math.PI; elevation += elevationStep) {
+      for (
+        let elevation = 0;
+        elevation <= Math.PI;
+        elevation += elevationStep
+      ) {
         pushCartesian(SPHERE_RADIUS, azimuth, elevation);
         pushCartesian(SPHERE_RADIUS, azimuth + azimuthStep, elevation);
-        pushCartesian(SPHERE_RADIUS, azimuth + azimuthStep, elevation + elevationStep);
+        pushCartesian(
+          SPHERE_RADIUS,
+          azimuth + azimuthStep,
+          elevation + elevationStep
+        );
 
         pushCartesian(SPHERE_RADIUS, azimuth, elevation);
         pushCartesian(SPHERE_RADIUS, azimuth, elevation + elevationStep);
-        pushCartesian(SPHERE_RADIUS, azimuth + azimuthStep, elevation + elevationStep);
+        pushCartesian(
+          SPHERE_RADIUS,
+          azimuth + azimuthStep,
+          elevation + elevationStep
+        );
       }
     }
 
@@ -104,7 +124,11 @@ class SphereRenderer {
     gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(0);
 
-    this.particleShader = new Shader(gl, sphereVertexShader, sphereFragmentShader);
+    this.particleShader = new Shader(
+      gl,
+      sphereVertexShader,
+      sphereFragmentShader
+    );
   }
 
   render(

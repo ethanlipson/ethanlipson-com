@@ -16,7 +16,7 @@ export default class Camera {
   sensitivity: number = 0.1;
   speed: number = 2.5;
 
-  position: vec3 = [0, 0, 5];
+  position: vec3 = [0, 0, 12];
   front: vec3 = [0, 0, 0];
   up: vec3 = [0, 1, 0];
   worldUp: vec3 = [0, 1, 0];
