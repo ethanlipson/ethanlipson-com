@@ -47,7 +47,7 @@ const Demo: React.FC = () => {
     gl.viewport(0, 0, canvas.current!.width, canvas.current!.height);
     gl.enable(gl.DEPTH_TEST);
 
-    space.current = new Space(gl, 10, 10, 200, 200, 1024);
+    space.current = new Space(gl, 10, 10, 150, 150, 2);
     space.current.addSphere([0, 0, 0], 2);
     space.current.addSphere([0, 3, 0], 2);
 
@@ -90,7 +90,7 @@ const Demo: React.FC = () => {
       }
       space.current.step(
         1 / 30,
-        30,
+        20,
         mouseX.current,
         mouseY.current,
         projection,

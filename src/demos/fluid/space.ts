@@ -1177,26 +1177,29 @@ class Space {
       gl.FLOAT,
       this.positionsCopyBuffer
     );
-    for (let i = 0; i < this.addedParticles.length; i++) {
-      this.positionsCopyBuffer[(this.numParticles + i) * 4 + 0] =
-        this.addedParticles[i].position[0];
-      this.positionsCopyBuffer[(this.numParticles + i) * 4 + 1] =
-        this.addedParticles[i].position[1];
-      this.positionsCopyBuffer[(this.numParticles + i) * 4 + 2] =
-        this.addedParticles[i].position[2];
+
+    if (this.addedParticles.length > 0) {
+      for (let i = 0; i < this.addedParticles.length; i++) {
+        this.positionsCopyBuffer[(this.numParticles + i) * 4 + 0] =
+          this.addedParticles[i].position[0];
+        this.positionsCopyBuffer[(this.numParticles + i) * 4 + 1] =
+          this.addedParticles[i].position[1];
+        this.positionsCopyBuffer[(this.numParticles + i) * 4 + 2] =
+          this.addedParticles[i].position[2];
+      }
+      gl.activeTexture(gl.TEXTURE0);
+      gl.texSubImage2D(
+        gl.TEXTURE_2D,
+        0,
+        0,
+        0,
+        MAX_TEXTURE_WIDTH,
+        Math.ceil(this.maxParticles / MAX_TEXTURE_WIDTH),
+        gl.RGBA,
+        gl.FLOAT,
+        this.positionsCopyBuffer
+      );
     }
-    gl.activeTexture(gl.TEXTURE0);
-    gl.texSubImage2D(
-      gl.TEXTURE_2D,
-      0,
-      0,
-      0,
-      MAX_TEXTURE_WIDTH,
-      Math.ceil(this.maxParticles / MAX_TEXTURE_WIDTH),
-      gl.RGBA,
-      gl.FLOAT,
-      this.positionsCopyBuffer
-    );
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, this.particleVelocitiesFBO);
     gl.readPixels(
