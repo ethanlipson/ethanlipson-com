@@ -5,15 +5,15 @@ import Link from 'next/link';
 import './globals.css';
 
 const videos = [
+  'boids',
   'fluid',
   'metaballs-3d',
-  'julia-sets',
-  'boids',
-  'cloth',
-  'gravity',
-  'jets',
-  'non-euclidean',
   'raytracing',
+  'cloth',
+  'julia-sets',
+  'gravity',
+  'non-euclidean',
+  'jets',
   'strange-attractors',
   'electrons',
   'heat-simulation',
