@@ -435,7 +435,11 @@ class Space {
     gl.vertexAttribPointer(1, 3, gl.FLOAT, false, 6 * 4, 3 * 4);
     gl.enableVertexAttribArray(1);
 
-    this.particleShader = new Shader(gl, sphereVertexShader, sphereFragmentShader);
+    this.particleShader = new Shader(
+      gl,
+      sphereVertexShader,
+      sphereFragmentShader
+    );
 
     /***************** Creating the compute shaders *****************/
 
@@ -758,7 +762,8 @@ class Space {
       const cellY = Math.floor((y - MIN_Y) / KERNEL_RADIUS) + 1;
       const cellZ = Math.floor((z - MIN_Z) / KERNEL_RADIUS) + 1;
 
-      const hash = cellX * NUM_CELLS_Y * NUM_CELLS_Z + cellY * NUM_CELLS_Z + cellZ;
+      const hash =
+        cellX * NUM_CELLS_Y * NUM_CELLS_Z + cellY * NUM_CELLS_Z + cellZ;
       hashes.push([i, hash]);
     }
 
@@ -848,21 +853,36 @@ class Space {
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, this.particleVelocitiesFBO);
     this.updateVelocityShader.use(gl);
-    gl.uniform1f(gl.getUniformLocation(this.updateVelocityShader.program, 'dt'), dt);
     gl.uniform1f(
-      gl.getUniformLocation(this.updateVelocityShader.program, 'alignmentCoefficient'),
+      gl.getUniformLocation(this.updateVelocityShader.program, 'dt'),
+      dt
+    );
+    gl.uniform1f(
+      gl.getUniformLocation(
+        this.updateVelocityShader.program,
+        'alignmentCoefficient'
+      ),
       this.alignmentCoefficient
     );
     gl.uniform1f(
-      gl.getUniformLocation(this.updateVelocityShader.program, 'cohesionCoefficient'),
+      gl.getUniformLocation(
+        this.updateVelocityShader.program,
+        'cohesionCoefficient'
+      ),
       this.cohesionCoefficient
     );
     gl.uniform1f(
-      gl.getUniformLocation(this.updateVelocityShader.program, 'separationCoefficient'),
+      gl.getUniformLocation(
+        this.updateVelocityShader.program,
+        'separationCoefficient'
+      ),
       this.separationCoefficient
     );
     gl.uniform1f(
-      gl.getUniformLocation(this.updateVelocityShader.program, 'targetSeparation'),
+      gl.getUniformLocation(
+        this.updateVelocityShader.program,
+        'targetSeparation'
+      ),
       this.targetSeparation
     );
     gl.uniform1f(
@@ -888,18 +908,27 @@ class Space {
       2
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.updateVelocityShader.program, 'sortedParticleIndices'),
+      gl.getUniformLocation(
+        this.updateVelocityShader.program,
+        'sortedParticleIndices'
+      ),
       8
     );
     gl.uniform1i(
-      gl.getUniformLocation(this.updateVelocityShader.program, 'cellStartIndices'),
+      gl.getUniformLocation(
+        this.updateVelocityShader.program,
+        'cellStartIndices'
+      ),
       9
     );
     gl.drawArrays(gl.TRIANGLES, 0, 6);
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, this.particlePositionsFBO);
     this.predictPositionShader.use(gl);
-    gl.uniform1f(gl.getUniformLocation(this.predictPositionShader.program, 'dt'), dt);
+    gl.uniform1f(
+      gl.getUniformLocation(this.predictPositionShader.program, 'dt'),
+      dt
+    );
     gl.uniform1i(
       gl.getUniformLocation(
         this.predictPositionShader.program,
@@ -909,7 +938,10 @@ class Space {
     );
     // particleVelocities is already "sorted" since it was copied from sortedParticleVelocities
     gl.uniform1i(
-      gl.getUniformLocation(this.predictPositionShader.program, 'particleVelocities'),
+      gl.getUniformLocation(
+        this.predictPositionShader.program,
+        'particleVelocities'
+      ),
       1
     );
     gl.drawArrays(gl.TRIANGLES, 0, 6);
@@ -926,7 +958,7 @@ class Space {
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
     this.drawParticles(gl, projection, view, model, lightPos);
-    this.drawEdges(gl, projection, view, model);
+    // this.drawEdges(gl, projection, view, model);
   }
 
   drawParticles(
@@ -975,7 +1007,12 @@ class Space {
     );
   }
 
-  drawEdges(gl: WebGL2RenderingContext, projection: mat4, view: mat4, model: mat4) {
+  drawEdges(
+    gl: WebGL2RenderingContext,
+    projection: mat4,
+    view: mat4,
+    model: mat4
+  ) {
     gl.bindVertexArray(this.edgeVAO);
 
     this.edgeShader.use(gl);
