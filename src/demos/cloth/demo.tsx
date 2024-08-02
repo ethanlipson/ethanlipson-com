@@ -4,8 +4,13 @@ import { mat4, vec3 } from 'gl-matrix';
 import Space from './space';
 import { NextPage } from 'next';
 import styles from './demo.module.css';
+import { isMobile } from 'react-device-detect';
 
-const INITIAL_CAMERA_POSITION = vec3.fromValues(0, 6.75, 16.5);
+const INITIAL_CAMERA_POSITION = vec3.scale(
+  vec3.create(),
+  [0, 6.75, 16.5],
+  isMobile ? 1.4 : 1
+);
 const INITIAL_CAMERA_PITCH = -20;
 const INITIAL_CAMERA_YAW = -90;
 
@@ -130,6 +135,13 @@ const Demo: React.FC = () => {
             );
           }
         }}
+        onTouchMove={event => {
+          if (!canvas.current) return;
+
+          const rect = canvas.current.getBoundingClientRect();
+          mouseX.current = event.touches[0].clientX - rect.left;
+          mouseY.current = event.touches[0].clientY - rect.top;
+        }}
         onKeyDown={event => {
           if (!space.current) return;
 
@@ -193,12 +205,23 @@ const Demo: React.FC = () => {
             rightClicking.current = true;
           }
         }}
+        onTouchStart={event => {
+          if (!canvas.current) return;
+
+          clicking.current = true;
+          const rect = canvas.current.getBoundingClientRect();
+          mouseX.current = event.touches[0].clientX - rect.left;
+          mouseY.current = event.touches[0].clientY - rect.top;
+        }}
         onMouseUp={event => {
           if (event.button === 0) {
             clicking.current = false;
           } else if (event.button === 2) {
             rightClicking.current = false;
           }
+        }}
+        onTouchEnd={event => {
+          clicking.current = false;
         }}
         onWheel={event => {
           if (!space.current) return;
