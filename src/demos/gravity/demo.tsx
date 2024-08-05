@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { mat4, vec3 } from 'gl-matrix';
 import Space from './space';
 import { NextPage } from 'next';
@@ -9,6 +9,7 @@ const MAX_FPS = 60;
 const Demo: NextPage = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const lastMouseClickRef = useRef<[number, number]>([0, 0]);
+  const frame = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -47,6 +48,19 @@ const Demo: NextPage = () => {
       lastTime = time;
 
       requestAnimationFrame(draw);
+
+      frame.current++;
+      if (
+        canvasRef.current &&
+        frame.current == 180 &&
+        lastMouseClickRef.current[0] == canvasRef.current.width / 2 &&
+        lastMouseClickRef.current[1] == canvasRef.current.height / 2
+      ) {
+        lastMouseClickRef.current = [
+          (canvasRef.current.width * 3) / 5,
+          (canvasRef.current.height * 3) / 5,
+        ];
+      }
     }
 
     requestAnimationFrame(draw);
