@@ -12,6 +12,9 @@ const Demo: React.FC = () => {
   const directions = useRef(new Set<Direction>());
   const shiftPressed = useRef(false);
   const paused = useRef(false);
+  const mouseX = useRef(0);
+  const mouseY = useRef(0);
+  const clicking = useRef(false);
 
   useEffect(() => {
     canvas.current!.width = window.innerWidth;
@@ -47,16 +50,6 @@ const Demo: React.FC = () => {
       gl.clearColor(0.1, 0.1, 0.1, 1.0);
       gl.clear(gl.COLOR_BUFFER_BIT);
 
-      if (!paused.current) {
-        for (let i = 0; i < 75; i++) {
-          space.current.addParticle(
-            [2.4 + Math.random() * 0.5, 2, Math.random() * 2 - 1],
-            [6, -6, 0]
-          );
-        }
-        space.current.step(gl, 0.0167);
-      }
-
       const projection = mat4.perspective(
         mat4.create(),
         (camera.current.fov * Math.PI) / 180,
@@ -66,6 +59,25 @@ const Demo: React.FC = () => {
       );
       const view = camera.current.getViewMatrix(mat4.create());
       const model = mat4.create();
+
+      if (!paused.current) {
+        for (let i = 0; i < 75; i++) {
+          space.current.addParticle(
+            [2.4 + Math.random() * 0.5, 2, Math.random() * 2 - 1],
+            [6, -6, 0]
+          );
+        }
+        space.current.step(
+          gl,
+          0.0167,
+          clicking.current,
+          mouseX.current,
+          mouseY.current,
+          projection,
+          view,
+          model
+        );
+      }
 
       space.current.draw(
         gl,
@@ -90,15 +102,7 @@ const Demo: React.FC = () => {
         ref={canvas}
         width="640"
         height="480"
-        onClick={() => canvas.current?.requestPointerLock()}
-        onMouseMove={event => {
-          if (document.pointerLockElement === canvas.current) {
-            camera.current.processMouseMovement(
-              event.movementX,
-              -event.movementY
-            );
-          }
-        }}
+        // onClick={() => canvas.current?.requestPointerLock()}
         onKeyDown={event => {
           shiftPressed.current = event.shiftKey;
 
@@ -145,6 +149,37 @@ const Demo: React.FC = () => {
           if (event.key.toLowerCase() === 'e') {
             directions.current.delete(Direction.UP);
           }
+        }}
+        onMouseDown={event => {
+          clicking.current = true;
+        }}
+        onMouseMove={event => {
+          if (!canvas.current) return;
+
+          const rect = canvas.current.getBoundingClientRect();
+          mouseX.current = event.clientX - rect.left;
+          mouseY.current = event.clientY - rect.top;
+        }}
+        onMouseUp={event => {
+          clicking.current = false;
+        }}
+        onTouchStart={event => {
+          if (!canvas.current) return;
+
+          clicking.current = true;
+          const rect = canvas.current.getBoundingClientRect();
+          mouseX.current = event.touches[0].clientX - rect.left;
+          mouseY.current = event.touches[0].clientY - rect.top;
+        }}
+        onTouchMove={event => {
+          if (!canvas.current) return;
+
+          const rect = canvas.current.getBoundingClientRect();
+          mouseX.current = event.touches[0].clientX - rect.left;
+          mouseY.current = event.touches[0].clientY - rect.top;
+        }}
+        onTouchEnd={event => {
+          clicking.current = false;
         }}
         tabIndex={0}
       />

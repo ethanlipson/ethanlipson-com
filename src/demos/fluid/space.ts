@@ -127,14 +127,28 @@ const applyExternalForcesFragmentShader = `#version 300 es
 
   uniform float dt;
 
+  uniform sampler2D particlePositions;
   uniform sampler2D particleVelocities;
+  uniform vec3 gravityCenter;
+  uniform vec3 prevGravityCenter;
+  uniform vec3 prevPrevGravityCenter;
+  uniform bool clicking;
 
   out vec4 particleCopyVelocity;
 
   void main() {
+    vec3 position = texelFetch(particlePositions, ivec2(gl_FragCoord.xy), 0).xyz;
     vec3 velocity = texelFetch(particleVelocities, ivec2(gl_FragCoord.xy), 0).xyz;
-    vec3 gravity = vec3(float(${GRAVITY[0]}), float(${GRAVITY[1]}), float(${GRAVITY[2]}));
-    particleCopyVelocity = vec4(velocity + gravity * dt, 1.0);
+
+    vec3 force = vec3(float(${GRAVITY[0]}), float(${GRAVITY[1]}), float(${GRAVITY[2]}));
+    
+    float gravityRadius = 1.4;
+    if (clicking && distance(position, gravityCenter) <= gravityRadius) {
+      force += normalize(gravityCenter - position) * pow(distance(position, gravityCenter), 2.0) * 50.0;
+      force += (gravityCenter - 2.0 * prevGravityCenter + prevPrevGravityCenter) / dt / dt;
+    }
+
+    particleCopyVelocity = vec4(velocity + force * dt, 1.0);
   }
 `;
 
@@ -720,6 +734,9 @@ class Space {
   positionsCopyBuffer: Float32Array;
   velocitiesCopyBuffer: Float32Array;
 
+  gravityCenterHistory: vec3[] = [];
+  prevClicking: boolean = false;
+
   constructor(gl: WebGL2RenderingContext, maxParticles: number) {
     this.numParticles = 0;
     this.maxParticles = maxParticles;
@@ -745,6 +762,10 @@ class Space {
 
     this.fluidRenderer = new SphereRenderer(gl);
     this.tileRenderer = new TileRenderer(gl);
+
+    for (let i = 0; i < 3; i++) {
+      this.gravityCenterHistory.push(vec3.fromValues(0, 0, 0));
+    }
 
     /***************** Creating the compute shaders *****************/
 
@@ -1166,7 +1187,50 @@ class Space {
     this.addedParticles.push(particle);
   }
 
-  step(gl: WebGL2RenderingContext, dt: number) {
+  getMouseRay(
+    gl: WebGL2RenderingContext,
+    mouseX: number,
+    mouseY: number,
+    projection: mat4,
+    view: mat4,
+    model: mat4
+  ) {
+    const x = (2 * mouseX) / gl.canvas.width - 1;
+    const y = 1 - (2 * mouseY) / gl.canvas.height;
+
+    const mvp = mat4.mul(
+      mat4.create(),
+      mat4.mul(mat4.create(), projection, view),
+      model
+    );
+    const mvpInv = mat4.invert(mat4.create(), mvp);
+
+    const rayOrigin = vec3.transformMat4(
+      vec3.create(),
+      vec3.fromValues(x, y, -1),
+      mvpInv
+    );
+    const rayEnd = vec3.transformMat4(
+      vec3.create(),
+      vec3.fromValues(x, y, 1),
+      mvpInv
+    );
+    const rayDirection = vec3.sub(vec3.create(), rayEnd, rayOrigin);
+    vec3.normalize(rayDirection, rayDirection);
+
+    return { rayOrigin, rayDirection };
+  }
+
+  step(
+    gl: WebGL2RenderingContext,
+    dt: number,
+    clicking: boolean,
+    mouseX: number,
+    mouseY: number,
+    projection: mat4,
+    view: mat4,
+    model: mat4
+  ) {
     gl.bindFramebuffer(gl.FRAMEBUFFER, this.particlePositionsFBO);
     gl.readPixels(
       0,
@@ -1342,6 +1406,30 @@ class Space {
     );
     gl.drawArrays(gl.TRIANGLES, 0, 6);
 
+    for (let i = this.gravityCenterHistory.length - 1; i >= 1; i--) {
+      this.gravityCenterHistory[i] = vec3.clone(
+        this.gravityCenterHistory[i - 1]
+      );
+    }
+
+    const ray = this.getMouseRay(gl, mouseX, mouseY, projection, view, model);
+    vec3.add(
+      this.gravityCenterHistory[0],
+      ray.rayOrigin,
+      vec3.scale(
+        vec3.create(),
+        ray.rayDirection,
+        -ray.rayOrigin[2] / ray.rayDirection[2]
+      )
+    );
+    this.gravityCenterHistory[0][1] += 1;
+
+    if (clicking && !this.prevClicking) {
+      for (let i = 1; i < this.gravityCenterHistory.length; i++) {
+        this.gravityCenterHistory[i] = vec3.clone(this.gravityCenterHistory[0]);
+      }
+    }
+
     gl.bindFramebuffer(gl.FRAMEBUFFER, this.particleCopyBufferFBO);
     this.applyExternalForcesShader.use(gl);
     gl.uniform1f(
@@ -1351,9 +1439,41 @@ class Space {
     gl.uniform1i(
       gl.getUniformLocation(
         this.applyExternalForcesShader.program,
+        'particlePositions'
+      ),
+      10
+    );
+    gl.uniform1i(
+      gl.getUniformLocation(
+        this.applyExternalForcesShader.program,
         'particleVelocities'
       ),
       11
+    );
+    gl.uniform1i(
+      gl.getUniformLocation(this.applyExternalForcesShader.program, 'clicking'),
+      clicking ? 1 : 0
+    );
+    gl.uniform3fv(
+      gl.getUniformLocation(
+        this.applyExternalForcesShader.program,
+        'gravityCenter'
+      ),
+      this.gravityCenterHistory[0]
+    );
+    gl.uniform3fv(
+      gl.getUniformLocation(
+        this.applyExternalForcesShader.program,
+        'prevGravityCenter'
+      ),
+      this.gravityCenterHistory[1]
+    );
+    gl.uniform3fv(
+      gl.getUniformLocation(
+        this.applyExternalForcesShader.program,
+        'prevPrevGravityCenter'
+      ),
+      this.gravityCenterHistory[2]
     );
     gl.drawArrays(gl.TRIANGLES, 0, 6);
     gl.activeTexture(gl.TEXTURE11);
@@ -1660,6 +1780,8 @@ class Space {
       Math.ceil(this.maxParticles / MAX_TEXTURE_WIDTH),
       0
     );
+
+    this.prevClicking = clicking;
   }
 
   draw(
