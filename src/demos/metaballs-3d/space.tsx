@@ -56,8 +56,8 @@ const functionComputeFragmentSource = `#version 300 es
       vec3 position = texelFetch(metaballData, ivec2(i, 0), 0).xyz;
       float radius = texelFetch(metaballData, ivec2(i, 1), 0).x;
 
-      float distanceToMetaball = distance(vec3(x, y, z), position);
-      sum += radius / distanceToMetaball;
+      float distanceToMetaball = length((vec3(x, y, z) - position));
+      sum += radius / pow(distanceToMetaball, 1.0);
     }
 
     FragColor = vec4(sum, 0.0, 0.0, 1.0);
@@ -584,7 +584,11 @@ export default class Space {
     /*********** Metaball marching cubes ***********/
     this.metaballVAO = gl.createVertexArray()!;
     gl.bindVertexArray(this.metaballVAO);
-    this.metaballShader = new Shader(gl, metaballVertexSource, metaballFragmentSource);
+    this.metaballShader = new Shader(
+      gl,
+      metaballVertexSource,
+      metaballFragmentSource
+    );
 
     this.triangulationTexture = gl.createTexture()!;
     gl.activeTexture(gl.TEXTURE1);
@@ -647,13 +651,28 @@ export default class Space {
       metaball.y += metaball.yvel;
       metaball.z += metaball.zvel;
 
-      if (metaball.x < metaball.radius || metaball.x > this.dim - metaball.radius) {
+      if (metaball.x < metaball.radius) {
+        metaball.x = metaball.radius;
         metaball.xvel *= -1;
       }
-      if (metaball.y < metaball.radius || metaball.y > this.dim - metaball.radius) {
+      if (metaball.x > this.dim - metaball.radius) {
+        metaball.x = this.dim - metaball.radius;
+        metaball.xvel *= -1;
+      }
+      if (metaball.y < metaball.radius) {
+        metaball.y = metaball.radius;
         metaball.yvel *= -1;
       }
-      if (metaball.z < metaball.radius || metaball.z > this.dim - metaball.radius) {
+      if (metaball.y > this.dim - metaball.radius) {
+        metaball.y = this.dim - metaball.radius;
+        metaball.yvel *= -1;
+      }
+      if (metaball.z < metaball.radius) {
+        metaball.z = metaball.radius;
+        metaball.zvel *= -1;
+      }
+      if (metaball.z > this.dim - metaball.radius - this.dim / 4) {
+        metaball.z = this.dim - metaball.radius - this.dim / 4;
         metaball.zvel *= -1;
       }
     });
@@ -750,7 +769,10 @@ export default class Space {
     gl.bindVertexArray(this.metaballVAO);
 
     this.metaballShader.use(gl);
-    gl.uniform1i(gl.getUniformLocation(this.metaballShader.program, 'dim'), this.dim);
+    gl.uniform1i(
+      gl.getUniformLocation(this.metaballShader.program, 'dim'),
+      this.dim
+    );
     gl.uniformMatrix4fv(
       gl.getUniformLocation(this.metaballShader.program, 'projection'),
       false,
@@ -770,7 +792,10 @@ export default class Space {
       gl.getUniformLocation(this.metaballShader.program, 'triangulation'),
       1
     );
-    gl.uniform1f(gl.getUniformLocation(this.metaballShader.program, 'isoLevel'), 1.0);
+    gl.uniform1f(
+      gl.getUniformLocation(this.metaballShader.program, 'isoLevel'),
+      1.0
+    );
     gl.uniform3fv(
       gl.getUniformLocation(this.metaballShader.program, 'lightPos'),
       lightPos
@@ -779,7 +804,10 @@ export default class Space {
       gl.getUniformLocation(this.metaballShader.program, 'numMetaballs'),
       this.metaballs.length
     );
-    gl.uniform1i(gl.getUniformLocation(this.metaballShader.program, 'metaballData'), 2);
+    gl.uniform1i(
+      gl.getUniformLocation(this.metaballShader.program, 'metaballData'),
+      2
+    );
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);

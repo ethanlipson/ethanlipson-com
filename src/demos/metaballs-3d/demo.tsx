@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from "react";
-import Camera, { Direction } from "./camera";
-import { NextPage } from "next";
-import { mat4 } from "gl-matrix";
-import styles from "./demo.module.css";
-import Space from "./space";
+import React, { useEffect, useRef } from 'react';
+import Camera, { Direction } from './camera';
+import { NextPage } from 'next';
+import { mat4 } from 'gl-matrix';
+import styles from './demo.module.css';
+import Space from './space';
 
 const MAX_FPS = 60;
 
@@ -75,10 +75,10 @@ const Metaballs3D: React.FC = () => {
 
     canvas.current!.width = window.innerWidth;
     canvas.current!.height = window.innerHeight;
-    const gl = canvas.current!.getContext("webgl2");
+    const gl = canvas.current!.getContext('webgl2');
 
     if (gl === null) {
-      throw new Error("WebGL 2 not supported");
+      throw new Error('WebGL 2 not supported');
     }
 
     gl.viewport(0, 0, canvas.current!.width, canvas.current!.height);
@@ -87,7 +87,7 @@ const Metaballs3D: React.FC = () => {
     const dim = isMobile ? 40 : 80;
     space.current = new Space(gl, dim);
     for (let i = 0; i < 10; i++) {
-      const radius = dim * (Math.random() * 0.035 + 0.025);
+      const radius = dim * (Math.random() * 0.025 + 0.025);
       const x = Math.random() * (dim - radius * 2) + radius;
       const y = Math.random() * (dim - radius * 2) + radius;
       const z = Math.random() * (dim - radius * 2) + radius;
@@ -119,7 +119,7 @@ const Metaballs3D: React.FC = () => {
 
       const deltaTime = time - lastTime;
 
-      directions.current.forEach((direction) => {
+      directions.current.forEach(direction => {
         camera.current.processKeyboard(
           direction,
           shiftPressed.current ? 3 : 1,
@@ -177,13 +177,13 @@ const Metaballs3D: React.FC = () => {
   }, []);
 
   return (
-    <div className={styles["metaballs-3d"]}>
+    <div className={styles['metaballs-3d']}>
       <canvas
         ref={canvas}
         width="640"
         height="480"
         onClick={() => canvas.current?.requestPointerLock()}
-        onMouseMove={(event) => {
+        onMouseMove={event => {
           if (document.pointerLockElement === canvas.current) {
             camera.current.processMouseMovement(
               event.movementX,
@@ -191,50 +191,50 @@ const Metaballs3D: React.FC = () => {
             );
           }
         }}
-        onKeyDown={(event) => {
+        onKeyDown={event => {
           shiftPressed.current = event.shiftKey;
 
-          if (event.key.toLowerCase() === "w") {
+          if (event.key.toLowerCase() === 'w') {
             directions.current.add(Direction.FORWARD);
           }
-          if (event.key.toLowerCase() === "s") {
+          if (event.key.toLowerCase() === 's') {
             directions.current.add(Direction.BACKWARD);
           }
-          if (event.key.toLowerCase() === "a") {
+          if (event.key.toLowerCase() === 'a') {
             directions.current.add(Direction.LEFT);
           }
-          if (event.key.toLowerCase() === "d") {
+          if (event.key.toLowerCase() === 'd') {
             directions.current.add(Direction.RIGHT);
           }
-          if (event.key.toLowerCase() === "q") {
+          if (event.key.toLowerCase() === 'q') {
             directions.current.add(Direction.DOWN);
           }
-          if (event.key.toLowerCase() === "e") {
+          if (event.key.toLowerCase() === 'e') {
             directions.current.add(Direction.UP);
           }
-          if (event.key === " ") {
+          if (event.key === ' ') {
             paused.current = !paused.current;
           }
         }}
-        onKeyUp={(event) => {
+        onKeyUp={event => {
           shiftPressed.current = false;
 
-          if (event.key.toLowerCase() === "w") {
+          if (event.key.toLowerCase() === 'w') {
             directions.current.delete(Direction.FORWARD);
           }
-          if (event.key.toLowerCase() === "s") {
+          if (event.key.toLowerCase() === 's') {
             directions.current.delete(Direction.BACKWARD);
           }
-          if (event.key.toLowerCase() === "a") {
+          if (event.key.toLowerCase() === 'a') {
             directions.current.delete(Direction.LEFT);
           }
-          if (event.key.toLowerCase() === "d") {
+          if (event.key.toLowerCase() === 'd') {
             directions.current.delete(Direction.RIGHT);
           }
-          if (event.key.toLowerCase() === "q") {
+          if (event.key.toLowerCase() === 'q') {
             directions.current.delete(Direction.DOWN);
           }
-          if (event.key.toLowerCase() === "e") {
+          if (event.key.toLowerCase() === 'e') {
             directions.current.delete(Direction.UP);
           }
         }}
