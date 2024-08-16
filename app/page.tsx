@@ -11,8 +11,8 @@ const videos = [
   'metaballs-3d',
   'julia-sets',
   'gravity',
-  'jets',
   'non-euclidean',
+  'jets',
   // 'raytracing',
   // 'strange-attractors',
   // 'electrons',
@@ -44,7 +44,7 @@ export default function Home() {
         View my resume <Link href="/resume.pdf">here</Link>.
       </p>
       <h1>My Work</h1>
-      <h5>Live Demos - Click to Try</h5>
+      <h5>Interactive Demos - Click to Try</h5>
       <div className="flex flex-row justify-center">
         <div className="w-5/6 grid sm:grid-cols-4 sm:grid-rows-2 grid-cols-2 grid-rows-4 gap-x-[1%] gap-y-[2%] sm:gap-y-[4%]">
           {videos.map((video, i) => (
