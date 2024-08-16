@@ -46,7 +46,7 @@ export default function Home() {
       <h1>My Work</h1>
       <h5>Live Demos - Click to Try</h5>
       <div className="flex flex-row justify-center">
-        <div className="w-5/6 grid grid-cols-4 grid-rows-2 gap-x-[1%] gap-y-[4%]">
+        <div className="w-5/6 grid sm:grid-cols-4 sm:grid-rows-2 grid-cols-2 grid-rows-4 gap-x-[1%] gap-y-[2%] sm:gap-y-[4%]">
           {videos.map((video, i) => (
             <Link key={i} href={`demos/${video}`}>
               <video
