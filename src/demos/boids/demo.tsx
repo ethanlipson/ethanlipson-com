@@ -14,6 +14,8 @@ const Demo: React.FC = () => {
   const directions = useRef(new Set<Direction>());
   const shiftPressed = useRef(false);
   const paused = useRef(false);
+  const clicking = useRef(false);
+  const prevTouchPosition = useRef({ x: 0, y: 0 });
 
   const [viewAngle, setViewAngle] = useState(240);
   const [alignmentCoefficient, setAlignmentCoefficient] = useState(1.0);
@@ -96,7 +98,13 @@ const Demo: React.FC = () => {
       const view = camera.current.getViewMatrix(mat4.create());
       const model = mat4.create();
 
-      space.current.draw(gl, projection, view, model, vec3.fromValues(0, 10, 10));
+      space.current.draw(
+        gl,
+        projection,
+        view,
+        model,
+        vec3.fromValues(0, 10, 10)
+      );
 
       lastTime = time;
 
@@ -125,124 +133,90 @@ const Demo: React.FC = () => {
   ]);
 
   return (
-    <div>
-      <div className={styles.options}>
-        <SliderOption
-          name="View Angle"
-          id="viewAngle"
-          value={viewAngle}
-          onChange={setViewAngle}
-          min={0}
-          max={360}
-          step={10}
-        />
-        <SliderOption
-          name="Cohesion Coefficient"
-          id="cohesion"
-          value={cohesionCoefficient}
-          onChange={setCohesionCoefficient}
-          min={0}
-          max={1}
-          step={0.05}
-        />
-        <SliderOption
-          name="Separation Coefficient"
-          id="separation"
-          value={separationCoefficient}
-          onChange={setSeparationCoefficient}
-          min={0}
-          max={5}
-          step={0.1}
-        />
-        <SliderOption
-          name="Alignment Coefficient"
-          id="alignment"
-          value={alignmentCoefficient}
-          onChange={setAlignmentCoefficient}
-          min={0}
-          max={5}
-          step={0.1}
-        />
-        <SliderOption
-          name="Target Separation"
-          id="targetSeparation"
-          value={targetSeparation}
-          onChange={setTargetSeparation}
-          min={0}
-          max={1}
-          step={0.05}
-        />
-        <SliderOption
-          name="Max Speed"
-          id="maxSpeed"
-          value={maxSpeed}
-          onChange={setMaxSpeed}
-          min={0}
-          max={10}
-          step={0.1}
-        />
-      </div>
-      <canvas
-        ref={canvas}
-        className={styles.canvas}
-        width="640"
-        height="480"
-        onClick={() => canvas.current?.requestPointerLock()}
-        onMouseMove={event => {
-          if (document.pointerLockElement === canvas.current) {
-            camera.current.processMouseMovement(event.movementX, -event.movementY);
-          }
-        }}
-        onKeyDown={event => {
-          shiftPressed.current = event.shiftKey;
+    <canvas
+      ref={canvas}
+      className={styles.canvas}
+      width="640"
+      height="480"
+      onMouseDown={() => {
+        clicking.current = true;
+      }}
+      onMouseMove={event => {
+        if (!clicking.current) return;
 
-          if (event.key.toLowerCase() === 'w') {
-            directions.current.add(Direction.FORWARD);
-          }
-          if (event.key.toLowerCase() === 's') {
-            directions.current.add(Direction.BACKWARD);
-          }
-          if (event.key.toLowerCase() === 'a') {
-            directions.current.add(Direction.LEFT);
-          }
-          if (event.key.toLowerCase() === 'd') {
-            directions.current.add(Direction.RIGHT);
-          }
-          if (event.key.toLowerCase() === 'q') {
-            directions.current.add(Direction.DOWN);
-          }
-          if (event.key.toLowerCase() === 'e') {
-            directions.current.add(Direction.UP);
-          }
-          if (event.key === ' ') {
-            paused.current = !paused.current;
-          }
-        }}
-        onKeyUp={event => {
-          shiftPressed.current = false;
+        camera.current.processMouseMovement(-event.movementX, event.movementY);
+      }}
+      onMouseUp={() => {
+        clicking.current = false;
+      }}
+      onTouchStart={event => {
+        clicking.current = true;
 
-          if (event.key.toLowerCase() === 'w') {
-            directions.current.delete(Direction.FORWARD);
-          }
-          if (event.key.toLowerCase() === 's') {
-            directions.current.delete(Direction.BACKWARD);
-          }
-          if (event.key.toLowerCase() === 'a') {
-            directions.current.delete(Direction.LEFT);
-          }
-          if (event.key.toLowerCase() === 'd') {
-            directions.current.delete(Direction.RIGHT);
-          }
-          if (event.key.toLowerCase() === 'q') {
-            directions.current.delete(Direction.DOWN);
-          }
-          if (event.key.toLowerCase() === 'e') {
-            directions.current.delete(Direction.UP);
-          }
-        }}
-        tabIndex={0}
-      />
-    </div>
+        const touch = event.touches[0];
+        prevTouchPosition.current = { x: touch.clientX, y: touch.clientY };
+      }}
+      onTouchMove={event => {
+        if (!clicking.current) return;
+
+        const touch = event.touches[0];
+        const movementX = touch.clientX - prevTouchPosition.current.x;
+        const movementY = touch.clientY - prevTouchPosition.current.y;
+        prevTouchPosition.current = { x: touch.clientX, y: touch.clientY };
+
+        camera.current.processMouseMovement(-movementX, movementY);
+      }}
+      onTouchEnd={() => {
+        clicking.current = false;
+      }}
+      onKeyDown={event => {
+        shiftPressed.current = event.shiftKey;
+
+        if (event.key.toLowerCase() === 'w') {
+          directions.current.add(Direction.FORWARD);
+        }
+        if (event.key.toLowerCase() === 's') {
+          directions.current.add(Direction.BACKWARD);
+        }
+        if (event.key.toLowerCase() === 'a') {
+          directions.current.add(Direction.LEFT);
+        }
+        if (event.key.toLowerCase() === 'd') {
+          directions.current.add(Direction.RIGHT);
+        }
+        if (event.key.toLowerCase() === 'q') {
+          directions.current.add(Direction.DOWN);
+        }
+        if (event.key.toLowerCase() === 'e') {
+          directions.current.add(Direction.UP);
+        }
+        if (event.key === ' ') {
+          paused.current = !paused.current;
+        }
+      }}
+      onKeyUp={event => {
+        shiftPressed.current = false;
+
+        if (event.key.toLowerCase() === 'w') {
+          directions.current.delete(Direction.FORWARD);
+        }
+        if (event.key.toLowerCase() === 's') {
+          directions.current.delete(Direction.BACKWARD);
+        }
+        if (event.key.toLowerCase() === 'a') {
+          directions.current.delete(Direction.LEFT);
+        }
+        if (event.key.toLowerCase() === 'd') {
+          directions.current.delete(Direction.RIGHT);
+        }
+        if (event.key.toLowerCase() === 'q') {
+          directions.current.delete(Direction.DOWN);
+        }
+        if (event.key.toLowerCase() === 'e') {
+          directions.current.delete(Direction.UP);
+        }
+      }}
+      tabIndex={0}
+    />
   );
 };
 

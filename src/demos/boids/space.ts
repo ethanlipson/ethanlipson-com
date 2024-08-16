@@ -387,35 +387,77 @@ class Space {
 
     /***************** Creating the sphere vertices *****************/
 
+    // const hexToVec3 = (hex: number) =>
+    //   [
+    //     ((hex >> 16) & 0xff) / 255,
+    //     ((hex >> 8) & 0xff) / 255,
+    //     (hex & 0xff) / 255,
+    //   ] as const;
+
+    const color1 = [0.5, 0.0, 1.0];
+    const color2 = [0.0, 1.0, 0.0];
+    const color3 = [0.0, 1.0, 1.0];
+    const color4 = [0.0, 0.0, 1.0];
+
+    // const color1 = [0xbf / 255, 0x5b / 255, 0x05 / 255];
+    // const color3 = [0x73 / 255, 0x7d / 255, 0x07 / 255];
+    // const color2 = [0xbf / 255, 0x7f / 255, 0x04 / 255];
+    // const color4 = [0x8c / 255, 0x1c / 255, 0x04 / 255];
+
+    // const color1 = [0x04 / 255, 0x8f / 255, 0x55 / 255];
+    // const color4 = [0x2c / 255, 0xbf / 255, 0x1f / 255];
+    // const color3 = [0x02 / 255, 0xdb / 255, 0x9e / 255];
+    // const color2 = [0xb8 / 255, 0xf5 / 255, 0x62 / 255];
+
+    // const color1 = hexToVec3(0x0437c4);
+    // const color2 = hexToVec3(0xffe224);
+    // const color3 = hexToVec3(0x8202cc);
+    // const color4 = hexToVec3(0x64fac0);
+
+    // const color1 = hexToVec3(0xfa810f);
+    // const color2 = hexToVec3(0xa936e3);
+    // const color3 = hexToVec3(0xfa48ce);
+    // const color4 = hexToVec3(0xed0202);
+
+    // const color2 = hexToVec3(0xf79b23);
+    // const color1 = [27 / 255, 62 / 255, 168 / 255];
+    // const color3 = hexToVec3(0xffffff);
+    // const color4 = hexToVec3(0xf56816);
+
+    // const color2 = [1, 0, 0];
+    // const color1 = [0.5, 0, 1];
+    // const color3 = [1, 1, 0];
+    // const color4 = [0, 1, 0];
+
     // prettier-ignore
     this.particleSphereVertices = [
       -0.05, -0.05, -0.1,
-      0.5, 0.0, 1.0,
+      ...color1,
       0.05, -0.05, -0.1,
-      0.5, 0.0, 1.0,
+      ...color1,
       0.0, 0.035, -0.1,
-      0.5, 0.0, 1.0,
+      ...color1,
 
       -0.05, -0.05, -0.1,
-      0.0, 1.0, 0.0,
+      ...color2,
       0.0, 0.035, -0.1,
-      0.0, 1.0, 0.0,
+      ...color2,
       0.0, 0.0, 0.2,
-      0.0, 1.0, 0.0,
+      ...color2,
 
       0.05, -0.05, -0.1,
-      0.0, 1.0, 1.0,
+      ...color3,
       0.0, 0.035, -0.1,
-      0.0, 1.0, 1.0,
+      ...color3,
       0.0, 0.0, 0.2,
-      0.0, 1.0, 1.0,
+      ...color3,
 
       -0.05, -0.05, -0.1,
-      0.0, 0.0, 1.0,
+      ...color4,
       0.05, -0.05, -0.1,
-      0.0, 0.0, 1.0,
+      ...color4,
       0.0, 0.0, 0.2,
-      0.0, 0.0, 1.0,
+      ...color4,
     ];
 
     /***************** Creating the sphere vertex buffers *****************/

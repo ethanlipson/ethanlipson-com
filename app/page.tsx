@@ -6,12 +6,12 @@ import './globals.css';
 
 const videos = [
   'boids',
+  'cloth',
   'fluid',
   'metaballs-3d',
-  'jets',
-  'cloth',
   'julia-sets',
   'gravity',
+  'jets',
   'non-euclidean',
   // 'raytracing',
   // 'strange-attractors',

@@ -28,13 +28,18 @@ export default class Camera {
 
   updateCameraVectors() {
     const tempFront: vec3 = [
-      Math.cos((this.pitch * Math.PI) / 180) * Math.cos((this.yaw * Math.PI) / 180),
+      Math.cos((this.pitch * Math.PI) / 180) *
+        Math.cos((this.yaw * Math.PI) / 180),
       Math.sin((this.pitch * Math.PI) / 180),
-      Math.cos((this.pitch * Math.PI) / 180) * Math.sin((this.yaw * Math.PI) / 180),
+      Math.cos((this.pitch * Math.PI) / 180) *
+        Math.sin((this.yaw * Math.PI) / 180),
     ];
     vec3.normalize(tempFront, tempFront);
 
-    vec3.normalize(this.right, vec3.cross(vec3.create(), tempFront, this.worldUp));
+    vec3.normalize(
+      this.right,
+      vec3.cross(vec3.create(), tempFront, this.worldUp)
+    );
 
     vec3.normalize(this.up, vec3.cross(vec3.create(), this.right, tempFront));
 
@@ -45,10 +50,16 @@ export default class Camera {
     this.yaw += xoffset * this.sensitivity;
     this.pitch += yoffset * this.sensitivity;
 
-    if (this.pitch > 89) {
-      this.pitch = 89;
-    } else if (this.pitch < -89) {
-      this.pitch = -89;
+    if (this.pitch > 60) {
+      this.pitch = 60;
+    } else if (this.pitch < -60) {
+      this.pitch = -60;
+    }
+
+    if (this.yaw > -90 + 60) {
+      this.yaw = -90 + 60;
+    } else if (this.yaw < -90 - 60) {
+      this.yaw = -90 - 60;
     }
 
     this.updateCameraVectors();
