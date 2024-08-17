@@ -8,9 +8,9 @@ const videos = [
   'boids',
   'cloth',
   'fluid',
+  'flow',
   'metaballs-3d',
   'julia-sets',
-  'flow',
   'gravity',
   'jets',
 ];
@@ -42,7 +42,7 @@ export default function Home() {
       <h1>My Work</h1>
       <h5>Interactive Demos - Click to Try</h5>
       <div className="flex flex-row justify-center">
-        <div className="w-5/6 grid sm:grid-cols-4 sm:grid-rows-2 grid-cols-2 grid-rows-4 gap-x-[1%] gap-y-[2%] sm:gap-y-[4%]">
+        <div className="w-5/6 grid sm:grid-cols-4 sm:grid-rows-2 grid-cols-2 grid-rows-4 gap-x-[1%] gap-y-[2%] sm:gap-y-[4%] grid-flow-row sm:grid-flow-col">
           {videos.map((video, i) => (
             <Link key={i} href={`demos/${video}`}>
               <video
