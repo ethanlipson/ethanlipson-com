@@ -3,6 +3,8 @@
 import PageTemplate from '@/src/components/pageTemplate';
 import Link from 'next/link';
 import './globals.css';
+import { isMobile } from 'react-device-detect';
+import Image from 'next/image';
 
 const videos = [
   'boids',
@@ -45,26 +47,35 @@ export default function Home() {
         <div className="w-5/6 grid sm:grid-cols-4 sm:grid-rows-2 grid-cols-2 grid-rows-4 gap-x-[1%] gap-y-[2%] sm:gap-y-[4%] grid-flow-row sm:grid-flow-col">
           {videos.map((video, i) => (
             <Link key={i} href={`demos/${video}`}>
-              <video
-                loop
-                muted
-                playsInline
-                onMouseOver={event => {
-                  (event.target as HTMLVideoElement).play();
-                }}
-                onMouseOut={event => {
-                  (event.target as HTMLVideoElement).pause();
-                  (event.target as HTMLVideoElement).currentTime = 0;
-                }}
-                onTouchStart={event => event.stopPropagation()}
-                onTouchMove={event => event.stopPropagation()}
-                onTouchEnd={event => event.stopPropagation()}
-              >
-                <source
-                  src={`/media/demos/videos/${video}.mp4#t=0.05`}
-                  type="video/mp4"
+              {isMobile ? (
+                <Image
+                  src={`/media/demos/images/${video}.png`}
+                  width={300}
+                  height={300}
+                  alt={video}
                 />
-              </video>
+              ) : (
+                <video
+                  loop
+                  muted
+                  playsInline
+                  onMouseOver={event => {
+                    (event.target as HTMLVideoElement).play();
+                  }}
+                  onMouseOut={event => {
+                    (event.target as HTMLVideoElement).pause();
+                    (event.target as HTMLVideoElement).currentTime = 0;
+                  }}
+                  onTouchStart={event => event.stopPropagation()}
+                  onTouchMove={event => event.stopPropagation()}
+                  onTouchEnd={event => event.stopPropagation()}
+                >
+                  <source
+                    src={`/media/demos/videos/${video}.mp4#t=0.05`}
+                    type="video/mp4"
+                  />
+                </video>
+              )}
             </Link>
           ))}
         </div>
