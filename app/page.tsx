@@ -10,13 +10,9 @@ const videos = [
   'fluid',
   'metaballs-3d',
   'julia-sets',
+  'flow',
   'gravity',
-  'non-euclidean',
   'jets',
-  // 'raytracing',
-  // 'strange-attractors',
-  // 'electrons',
-  // 'heat-simulation',
 ];
 
 export default function Home() {
