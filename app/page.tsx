@@ -14,7 +14,7 @@ const videos = [
   'metaballs-3d',
   'julia-sets',
   'gravity',
-  'jets',
+  'waves',
 ];
 
 export default function Home() {
