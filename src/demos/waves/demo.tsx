@@ -116,7 +116,7 @@ const Demo: React.FC = () => {
       />
       <p
         ref={textRef}
-        className={`absolute pointer-events-none text-white text-2xl z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-150`}
+        className="absolute pointer-events-none text-white text-2xl z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-150"
       >
         Tap screen
       </p>

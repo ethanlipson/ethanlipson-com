@@ -10,6 +10,13 @@ export default function Writing() {
     <PageTemplate highlightWriting>
       <h1>Writing</h1>
       <p>
+        October 13, 2024
+        <br />
+        <Link href="/writing/rotation">
+          <b>Why Do Rotations Happen Around an Axis?</b>
+        </Link>
+      </p>
+      <p>
         January 31, 2024
         <br />
         <Link href="/writing/measure">
