@@ -14,3 +14,7 @@ a {
 html {
   scroll-behavior: smooth;
 }
+
+.katex-html {
+  white-space: normal;
+}

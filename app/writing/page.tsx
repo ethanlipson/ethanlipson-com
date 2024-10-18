@@ -1,14 +1,22 @@
-'use client';
+"use client";
 
-import InfoBox from '@/src/components/infoBox';
-import PageTemplate from '@/src/components/pageTemplate';
-import Link from 'next/link';
-import '../globals.css';
+import PageTemplate from "@/src/components/pageTemplate";
+import Link from "next/link";
+import "../globals.css";
 
 export default function Writing() {
   return (
     <PageTemplate highlightWriting>
       <h1>Writing</h1>
+      <p>
+        October 18, 2024
+        <br />
+        <Link href="/writing/exp-equivalence">
+          <b>
+            The Many Faces of e<sup>x</sup>
+          </b>
+        </Link>
+      </p>
       <p>
         October 13, 2024
         <br />
