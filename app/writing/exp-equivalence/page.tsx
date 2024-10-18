@@ -195,7 +195,7 @@ export default function Writing() {
         definition of the exponential from earlier is typically formulated
         according to{" "}
         <Link href="https://en.wikipedia.org/wiki/Lie_theory">Lie Theory</Link>{" "}
-        (pronounced &quot;Lee&quot;), explores integration of differential
+        (pronounced &quot;Lee&quot;), which explores integration of differential
         equations on smooth surfaces (manifolds). Lie theory is helpful for
         working with commonly used rotation groups such as{" "}
         <Latex>$SO(2)$</Latex>, <Latex>$SO(3)$</Latex>, and{" "}
