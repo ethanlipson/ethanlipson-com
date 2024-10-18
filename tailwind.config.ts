@@ -7,7 +7,14 @@ const config: Config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  theme: {},
+  theme: {
+    extend: {
+      fontFamily: {
+        small: ['var(--font-raleway)'],
+        big: ['var(--font-raleway-heavy)'],
+      },
+    },
+  },
   plugins: [require('@tailwindcss/container-queries')],
 };
 export default config;

@@ -26,7 +26,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body
+        className={`${raleway.variable} font-small ${ralewayHeavy.variable} font-big`}
+      >
         {children}
         <Analytics />
       </body>
