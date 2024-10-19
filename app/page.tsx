@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import PageTemplate from '@/src/components/pageTemplate';
-import Link from 'next/link';
-import './globals.css';
-import { isMobile } from 'react-device-detect';
-import Image from 'next/image';
+import PageTemplate from "@/src/components/pageTemplate";
+import Link from "next/link";
+import "./globals.css";
+import { isMobile } from "react-device-detect";
+import Image from "next/image";
 
 const videos = [
-  'boids',
-  'cloth',
-  'fluid',
-  'flow',
-  'metaballs-3d',
-  'julia-sets',
-  'gravity',
-  'waves',
+  "boids",
+  "cloth",
+  "fluid",
+  "flow",
+  "metaballs-3d",
+  "julia-sets",
+  "gravity",
+  "waves",
 ];
 
 export default function Home() {
@@ -22,7 +22,7 @@ export default function Home() {
     <PageTemplate>
       <h1>Home</h1>
       <p>
-        I&apos;m a rising junior at Columbia studying Applied Math. I&apos;m
+        Hi, I&apos;m Ethan, a junior at Columbia studying Applied Math. I&apos;m
         currently conducting research with Changxi Zheng on differentiable fluid
         simulation, with the goal of massively speeding up the design of
         vehicles with aero/hydrodynamic properties like airplanes, cars, and
@@ -39,7 +39,7 @@ export default function Home() {
         medalist at poker.
       </p>
       <p>
-        View my resume <Link href="/resume.pdf">here</Link>.
+        You can view my resume <Link href="/resume.pdf">here</Link>.
       </p>
       <h1>My Work</h1>
       <h5>Interactive Demos - Click to Try</h5>
