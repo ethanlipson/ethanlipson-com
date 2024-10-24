@@ -209,8 +209,13 @@ export default function Writing() {
       </p>
       <p>
         Update 10/19/24:{" "}
-        <Link href="/media/writing/exp-equivalence/appendix.pdf">here</Link> is
+        <Link href="/media/writing/exp-equivalence/appendix.pdf">Here</Link> is
         an appendix demonstrating some algebraic facts about exponentials.
+      </p>
+      <p>
+        Update 10/24/24: I&apos;ve posted the article on applications of
+        abstract exponentiation, available{" "}
+        <Link href="/writing/exp-applications">here</Link>.
       </p>
       <div className="flex flex-row justify-center">
         <div className="w-[90%] h-[1px] bg-gray-400 mt-4" />
