@@ -9,6 +9,13 @@ export default function Writing() {
     <PageTemplate highlightWriting>
       <h1>Writing</h1>
       <p>
+        October 30, 2024
+        <br />
+        <Link href="/writing/log-derivative">
+          <b>Why is Log the Antiderivative of 1/x?</b>
+        </Link>
+      </p>
+      <p>
         October 24, 2024
         <br />
         <Link href="/writing/exp-applications">
