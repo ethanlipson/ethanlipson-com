@@ -129,12 +129,17 @@ export default function Writing() {
           The Fourier transform <Latex>$\hat f$</Latex> of a function{" "}
           <Latex>$f$</Latex>, defined as
         </p>
-        <Latex>{`$$\\hat f(\\omega) = \\int_{-\\infty}^\\infty e^{i\\omega t}f(t)dt$$`}</Latex>
+        <Latex>{`$$\\hat f(\\omega) = \\int_{-\\infty}^\\infty e^{-i\\omega t}f(t)dt$$`}</Latex>
         <p>
-          tells us how to represent a function as a sum/integral of complex
-          exponentials. <Latex>$\hat f(\omega)$</Latex> tells us how strongly
-          the frequency <Latex>$\omega$</Latex> contributes to{" "}
-          <Latex>$f$</Latex>.{" "}
+          says how to represent a function as a sum/integral of complex
+          exponentials. More specifically, <Latex>$\hat f(\omega)$</Latex>{" "}
+          indicates how strongly the frequency <Latex>$\omega$</Latex>{" "}
+          contributes to <Latex>$f$</Latex>. The inverse relationship is
+        </p>
+        <Latex>{`$$f(t) = \\int_{-\\infty}^\\infty e^{i\\omega t}\\hat f(\\omega)d\\omega$$`}</Latex>
+        <p>
+          which says that <Latex>$f$</Latex> is an infinite linear combination
+          of exponentials, weighted by <Latex>$\hat f$</Latex>.
         </p>
       </InfoBox>
       <p>
@@ -218,7 +223,7 @@ export default function Writing() {
       </p>
       <Latex>{`$$\\frac{\\mathrm d}{\\mathrm dt}u = \\frac{\\mathrm d^2}{\\mathrm dx^2}u$$`}</Latex>
       <p>
-        where <Latex>$u(x, t)$</Latex> tells us the temperature at position{" "}
+        where <Latex>$u(x, t)$</Latex> equals the temperature at position{" "}
         <Latex>$x$</Latex> at time <Latex>$t$</Latex>. When we&apos;re solving
         this computationally, we usually have a starting vector{" "}
         <Latex>$u(x, 0)$</Latex> of temperatures, and we use the heat equation

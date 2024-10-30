@@ -49,17 +49,17 @@ export default function Writing() {
         <Latex>{`$x^{-1.01}$`}</Latex>, <Latex>{`$x^{-1.001}$`}</Latex>, and so
         on. That is, we should expect
       </p>
-      <Latex>{`$$\\int x^{-1}\\mathrm dx = \\lim_{p \\to -1} \\int x^p\\mathrm dx$$`}</Latex>
+      <Latex>{`$$\\int t^{-1}\\mathrm dt = \\lim_{p \\to -1} \\int t^p\\mathrm dt$$`}</Latex>
       <p>
         Note that we need to pay special attention to the bounds of integration
-        here. If we start the integral of <Latex>{`$x^{-1}$`}</Latex> from{" "}
-        <Latex>$x = 0$</Latex>, it diverges, so we need to start from{" "}
-        <Latex>$x = 1$</Latex> instead. Thus, for any positive input{" "}
-        <Latex>$a$</Latex>, we want
+        here. If we start the integral of <Latex>{`$t^{-1}$`}</Latex> from{" "}
+        <Latex>$t = 0$</Latex>, it diverges, so we need to start from{" "}
+        <Latex>$t = 1$</Latex> instead. Thus, for any positive input{" "}
+        <Latex>$x$</Latex>, we want
       </p>
-      <Latex>{`$$\\int_1^a x^{-1}\\mathrm dx = \\lim_{p \\to -1} \\int_1^a x^p\\mathrm dx$$`}</Latex>
+      <Latex>{`$$\\int_1^x t^{-1}\\mathrm dt = \\lim_{p \\to -1} \\int_1^x t^p\\mathrm dt$$`}</Latex>
       <p>The expression on the right becomes</p>
-      <Latex>{`$$\\lim_{p \\to -1} \\frac{a^{p+1} - 1}{p+1}$$`}</Latex>
+      <Latex>{`$$\\lim_{p \\to -1} \\frac{x^{p+1} - 1}{p+1}$$`}</Latex>
       <p>which, on a graph, actually looks pretty close to a logarithm!</p>
       <div className="flex justify-center">
         <Image src={plot} alt="plot" className="w-2/3 min-w-[20rem]" />
@@ -70,43 +70,48 @@ export default function Writing() {
         would be to show that the above expression actually approaches a
         logarithm, i.e.
       </p>
-      <Latex>{`$$\\lim_{p \\to -1} \\frac{a^{p+1} - 1}{p+1} = \\log(a)$$`}</Latex>
+      <Latex>{`$$\\lim_{p \\to -1} \\frac{x^{p+1} - 1}{p+1} = \\log(x)$$`}</Latex>
       <p>which can be rewritten as</p>
-      <Latex>{`$$\\lim_{p \\to 0} \\frac{a^p - 1}p = \\log(a)$$`}</Latex>
+      <Latex>{`$$\\lim_{p \\to 0} \\frac{x^p - 1}p = \\log(x)$$`}</Latex>
       <p>
         Occasionally, this limit is used as a definition of{" "}
         <Latex>$\log$</Latex> itself! But there&apos;s actually a very simple
-        explanation. Remember that <Latex>$\log a$</Latex> is the inverse of{" "}
-        <Latex>$e^a$</Latex>, which is defined as
+        explanation. Remember that <Latex>$\log x$</Latex> is the inverse of{" "}
+        <Latex>$e^x$</Latex>, which is defined as
       </p>
-      <Latex>{`$$\\lim_{n \\to \\infty} \\left(1+\\frac an\\right)^n$$`}</Latex>
+      <Latex>{`$$\\lim_{n \\to \\infty} \\left(1+\\frac xn\\right)^n$$`}</Latex>
       <p>
         (Remember back to your introduction to <Latex>$e$</Latex> as compound
         interest!) If we make the substitution <Latex>$p = \frac1n$</Latex>, the
         above expression becomes
       </p>
-      <Latex>{`$$\\lim_{p \\to \\infty} \\left(1+ap\\right)^{\\frac1p}$$`}</Latex>
+      <Latex>{`$$\\lim_{p \\to \\infty} \\left(1+xp\\right)^{\\frac1p}$$`}</Latex>
       <p>
-        Now, just as the defining relationship between <Latex>$e^a$</Latex> and{" "}
-        <Latex>$\log$</Latex> is <Latex>$\log e^a = a$</Latex>, we can do the
+        Now, just as the defining relationship between <Latex>$e^x$</Latex> and{" "}
+        <Latex>$\log$</Latex> is <Latex>$\log e^x = x$</Latex>, we can do the
         same for their limiting expressions:
       </p>
-      <Latex>{`$$\\lim_{p \\to \\infty} \\left(1 + \\frac{a^p - 1}pp\\right)^{\\frac1p} \\\\ = \\lim_{p \\to \\infty} \\left(1 + a^p - 1\\right)^{\\frac1p} \\\\ = \\lim_{p \\to \\infty} \\left(a^p\\right)^{\\frac1p} \\\\ = a$$`}</Latex>
+      <Latex>{`$$\\lim_{p \\to \\infty} \\left(1 + \\frac{x^p - 1}pp\\right)^{\\frac1p} \\\\ = \\lim_{p \\to \\infty} \\left(1 + x^p - 1\\right)^{\\frac1p} \\\\ = \\lim_{p \\to \\infty} \\left(x^p\\right)^{\\frac1p} \\\\ = x$$`}</Latex>
       <p>
         and as you can check for yourself, the same applies the other way
-        around, just like <Latex>{`$e^{\\log a}$`}</Latex>. So it&apos;s not a
+        around, just like <Latex>{`$e^{\\log x}$`}</Latex>. So it&apos;s not a
         surprise that{" "}
-        <Latex>{`$\\lim_{p \\to 0} \\frac{a^p - 1}p = \\log(a)$`}</Latex>.
+        <Latex>{`$\\lim_{p \\to 0} \\frac{x^p - 1}p = \\log(x)$`}</Latex>.
       </p>
       <p>
         Another way to view the logarithm here is in terms of growth rate.{" "}
         <Latex>$\log x$</Latex> is a <i>subpolynomial function</i>, which means
-        that it grows slower than any polynomial. This is what we should expect
-        from the power rule: we want the antiderivative of{" "}
-        <Latex>{`$x^{-1}$`}</Latex> to look something like <Latex>$x^0$</Latex>,
-        which would also be subpolynomial (since it&apos;s a constant). And
-        although we don&apos;t quite get that answer, its subpolynomial nature
-        is echoed in the logarithm.
+        that it grows slower than any polynomial.
+        <sup>
+          <a id="footnote-2-ref" href="#footnote-2">
+            [2]
+          </a>
+        </sup>{" "}
+        This is what we should expect from the power rule: we want the
+        antiderivative of <Latex>{`$x^{-1}$`}</Latex> to look something like{" "}
+        <Latex>$x^0$</Latex>, which would also be subpolynomial (since it&apos;s
+        a constant). And although we don&apos;t quite get that answer, its
+        subpolynomial nature is echoed in the logarithm.
       </p>
       <p>
         Similarly, note that <Latex>$e^x$</Latex> is <i>superpolynomial</i>,
@@ -128,6 +133,21 @@ export default function Writing() {
           <Latex>$1 = e^yy&apos;$</Latex>, and therefore{" "}
           <Latex>{`$y' = \\frac1{e^y} = \\frac1x$`}</Latex>.{" "}
           <a href="#footnote-1-ref">&#8617;</a>
+        </li>
+        <li id="footnote-2">
+          If you&apos;re familiar with the notion of{" "}
+          <Link href="https://en.wikipedia.org/wiki/Uniform_convergence">
+            uniform convergence
+          </Link>
+          , perhaps from a real analysis course, then it&apos;s worth noting
+          that the polynomials <Latex>{`$\\frac{x^p - 1}p$`}</Latex> don&apos;t
+          converge to <Latex>$\log x$</Latex> uniformly, precisely because of
+          the logarithm&apos;s subpolynomial nature: for any <Latex>$p$</Latex>,
+          the polynomial gets arbitrarily far away from the logarithm for large{" "}
+          <Latex>$x$</Latex>. However, if we consider a positive bounded
+          interval <Latex>$(\varepsilon, \frac1\varepsilon)$</Latex> with{" "}
+          <Latex>{`$\\varepsilon > 0$`}</Latex>, then we do indeed get uniform
+          convergence. <a href="#footnote-2-ref">&#8617;</a>
         </li>
       </ol>
     </PageTemplate>
