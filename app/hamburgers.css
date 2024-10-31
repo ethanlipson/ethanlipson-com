@@ -20,20 +20,20 @@
   margin: 0;
   overflow: visible;
 }
-.hamburger:hover {
+/* .hamburger:hover {
   opacity: 0.7;
 }
 .hamburger.is-active:hover {
   opacity: 0.7;
-}
+} */
 .hamburger.is-active .hamburger-inner,
 .hamburger.is-active .hamburger-inner::before,
 .hamburger.is-active .hamburger-inner::after {
-  background-color: #fff;
+  background-color: rgb(180, 180, 180);
 }
 
 .hamburger-box {
-  width: 40px;
+  width: 30px;
   height: 24px;
   display: inline-block;
   position: relative;
@@ -47,9 +47,9 @@
 .hamburger-inner,
 .hamburger-inner::before,
 .hamburger-inner::after {
-  width: 40px;
-  height: 4px;
-  background-color: #fff;
+  width: 30px;
+  height: 3px;
+  background-color: rgb(180, 180, 180);
   border-radius: 4px;
   position: absolute;
   transition-property: transform;

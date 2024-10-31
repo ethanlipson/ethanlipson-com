@@ -1,9 +1,9 @@
-import { Ubuntu } from 'next/font/google';
-import { useEffect, useState } from 'react';
-import 'tailwindcss/tailwind.css';
-import '../../app/hamburgers.css';
+import { Ubuntu } from "next/font/google";
+import { useEffect, useState } from "react";
+import "tailwindcss/tailwind.css";
+import "../../app/hamburgers.css";
 
-const ubuntu = Ubuntu({ subsets: ['latin'], weight: '400' });
+const ubuntu = Ubuntu({ subsets: ["latin"], weight: "400" });
 
 interface Props {
   highlightWriting?: boolean;
@@ -18,12 +18,6 @@ export default function Navbar({
 }: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // useEffect(() => {
-  //   if (startWithCloseAnimation) {
-  //     setMenuOpen(false);
-  //   }
-  // }, []);
-
   const home = (
     <a href="/" className="text-white text-3xl">
       Ethan Lipson
@@ -33,7 +27,7 @@ export default function Navbar({
     <a
       href="/writing"
       className={`${
-        highlightWriting ? 'text-white' : 'text-[#b4b4b4]'
+        highlightWriting ? "text-white" : "text-[#b4b4b4]"
       } transition hover:text-white text-xl`}
     >
       Writing
@@ -43,7 +37,7 @@ export default function Navbar({
     <a
       href="/about"
       className={`${
-        highlightAbout ? 'text-white' : 'text-[#b4b4b4]'
+        highlightAbout ? "text-white" : "text-[#b4b4b4]"
       }  transition hover:text-white text-xl`}
     >
       About
@@ -54,13 +48,13 @@ export default function Navbar({
     <nav className={`${ubuntu.className} @container`}>
       <div
         className={`transition-all duration-300 ${
-          menuOpen ? 'max-h-64' : 'max-h-24'
+          menuOpen ? "max-h-64" : "max-h-24"
         } overflow-hidden`}
       >
         <div className="@xl:hidden flex flex-col items-center justify-center py-8 gap-12 bg-black uppercase tracking-widest">
           <button
-            className={`absolute left-0 top-6 hamburger hamburger--collapse ${
-              menuOpen ? 'is-active' : ''
+            className={`absolute left-2 top-6 hamburger hamburger--collapse ${
+              menuOpen ? "is-active" : ""
             }`}
             type="button"
             onClick={() => setMenuOpen(open => !open)}
