@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Demo from '@/src/demos/flow/demo';
-import DemoTemplate from '@/src/components/demoTemplate';
+import Demo from "@/src/demos/flow/demo";
+import DemoTemplate from "@/src/components/demoTemplate";
 
 const ResetButton = () => {
   return (
@@ -23,7 +23,11 @@ export default function Flow() {
         <h1>Flow</h1>
         <p>Flow simulation using the Lattice-Boltzmann method</p>
         <h3>Controls</h3>
-        <p>Draw with your mouse or finger!</p>
+        <p>
+          Draw with your mouse or finger!
+          <br />
+          Press the reset button to reset the simulation
+        </p>
       </DemoTemplate>
       <ResetButton />
     </>

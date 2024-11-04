@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Demo from '@/src/demos/waves/demo';
-import DemoTemplate from '@/src/components/demoTemplate';
+import Demo from "@/src/demos/waves/demo";
+import DemoTemplate from "@/src/components/demoTemplate";
 
 const ResetButton = () => {
   return (
@@ -23,7 +23,7 @@ export default function Flow() {
         <h1>Waves</h1>
         <p>Wave equation solver</p>
         <h3>Controls</h3>
-        <p>Tap to create a pulse!</p>
+        <p>Tap/click to create a pulse!</p>
       </DemoTemplate>
       <ResetButton />
     </>

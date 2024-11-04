@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Demo from '@/src/demos/gravity/demo';
-import DemoTemplate from '@/src/components/demoTemplate';
+import Demo from "@/src/demos/gravity/demo";
+import DemoTemplate from "@/src/components/demoTemplate";
 
 export default function Gravity() {
   return (
@@ -9,7 +9,7 @@ export default function Gravity() {
       <h1>Particle Gravity</h1>
       <p>Particles falling toward/orbiting around a center of gravity.</p>
       <h3>Controls</h3>
-      <p>Tap/click: move the center of gravity</p>
+      <p>Tap/click to move the center of gravity</p>
     </DemoTemplate>
   );
 }

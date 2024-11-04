@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Demo from '@/src/demos/metaballs-3d/demo';
-import DemoTemplate from '@/src/components/demoTemplate';
+import Demo from "@/src/demos/metaballs-3d/demo";
+import DemoTemplate from "@/src/components/demoTemplate";
 
 export default function Metaballs3D() {
   return (
@@ -14,6 +14,8 @@ export default function Metaballs3D() {
       </p>
       <h3>Controls</h3>
       <p>
+        <b>Desktop</b>
+        <br />
         Click to enter interactive mode
         <br />
         Esc to exit interactive mode
@@ -30,7 +32,7 @@ export default function Metaballs3D() {
         <br />
         Space: pause/play
       </p>
-      <div style={{ height: '50px' }} />
+      <div style={{ height: "50px" }} />
       <h2>How it Works</h2>
       <p>
         There are four major elements to this demo: isosurfaces, marching cubes,
@@ -68,7 +70,7 @@ export default function Metaballs3D() {
         isn&apos;t totally clear. Luckily an algorithm exists to do exactly
         that, called <i>marching cubes</i>. The algorithm is a bit too
         complicated to go into detail here, but for anyone interested, Sebastian
-        Lague has a fantastic explanation{' '}
+        Lague has a fantastic explanation{" "}
         <a href="https://www.youtube.com/watch?v=M3iI2l0ltbE">in video form</a>.
         The upshot is that it allows us to create something like this:
       </p>
@@ -116,7 +118,7 @@ export default function Metaballs3D() {
       </p>
       <p>
         We would like to tell the graphics card to run the metaball
-        calculations. Normally, we would do this using something called a{' '}
+        calculations. Normally, we would do this using something called a{" "}
         <i>compute shader</i>, but WebGL doesn&apos;t let us use these. Instead,
         we need to be clever about it. In this case, the solution is to tell
         WebGL to draw a picture, where the brightness of each pixel in the

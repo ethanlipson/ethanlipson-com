@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Demo from '@/src/demos/fluid/demo';
-import DemoTemplate from '@/src/components/demoTemplate';
+import Demo from "@/src/demos/fluid/demo";
+import DemoTemplate from "@/src/components/demoTemplate";
 
 export default function Fluid() {
   return (
@@ -11,31 +11,15 @@ export default function Fluid() {
         Computation fluid dynamics, usually just called fluid simulation, is an
         integral part of aerospace, weather prediction, computer graphics, and
         just about any other field of engineering. This version is an
-        implementation of{' '}
+        implementation of{" "}
         <a href="https://mmacklin.com/pbf_sig_preprint.pdf">
           Position Based Fluids
-        </a>{' '}
+        </a>{" "}
         by Macklin and M&#252;ller.
       </p>
       <h3>Controls</h3>
-      <p>
-        Click to enter interactive mode
-        <br />
-        Esc to exit interactive mode
-        <br />
-        Move mouse: rotate camera
-        <br />
-        W/S: move camera forward/backward
-        <br />
-        A/D: move camera left/right
-        <br />
-        E/Q: move camera up/down
-        <br />
-        Hold shift: move camera faster
-        <br />
-        Space: pause/play
-      </p>
-      <div style={{ height: '50px' }} />
+      <p>Drag the water to manipulate it</p>
+      <div style={{ height: "50px" }} />
       <h2>How it Works</h2>
       <p>
         In order to understand how fluid simulation works, we must first
@@ -58,7 +42,7 @@ export default function Fluid() {
         question becomes, &quot;how can we distill the essence of fluid into a
         particle update rule?&quot; For centuries, mathematicians and physicists
         have attempted to answer this question, the most substantial of which
-        has been the{' '}
+        has been the{" "}
         <a href="https://wikipedia.org/wiki/Navier-Stokes_equations">
           Navier-Stokes equations
         </a>
@@ -77,7 +61,7 @@ export default function Fluid() {
       <p>
         The technique of enforcing constant density already gets us a pretty
         good simulation, but there&apos;s one more trick here that really seals
-        the deal. It&apos;s a nearly universal fact that the more <i>action</i>{' '}
+        the deal. It&apos;s a nearly universal fact that the more <i>action</i>{" "}
         a simulation has, the more it grabs the viewer&apos;s attention. In this
         case, action corresponds to high turbulance, with water flowing every
         which way.

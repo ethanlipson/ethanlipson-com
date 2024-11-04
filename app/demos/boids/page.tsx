@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Demo from '@/src/demos/boids/demo';
-import DemoTemplate from '@/src/components/demoTemplate';
+import Demo from "@/src/demos/boids/demo";
+import DemoTemplate from "@/src/components/demoTemplate";
 
 export default function Boids() {
   return (
@@ -16,23 +16,11 @@ export default function Boids() {
       </p>
       <h3>Controls</h3>
       <p>
-        Click to enter interactive mode
+        Drag to look around
         <br />
-        Esc to exit interactive mode
-        <br />
-        Move mouse: rotate camera
-        <br />
-        W/S: move camera forward/backward
-        <br />
-        A/D: move camera left/right
-        <br />
-        E/Q: move camera up/down
-        <br />
-        Hold shift: move camera faster
-        <br />
-        Space: pause/play
+        Press space to pause/play
       </p>
-      <div style={{ height: '50px' }} />
+      <div style={{ height: "50px" }} />
       <h2>How it Works</h2>
       <p>
         Despite being able to form large clusters, the boids themselves only

@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Demo from '@/src/demos/cloth/demo';
-import DemoTemplate from '@/src/components/demoTemplate';
+import Demo from "@/src/demos/cloth/demo";
+import DemoTemplate from "@/src/components/demoTemplate";
 
 export default function Cloth() {
   return (
@@ -14,19 +14,10 @@ export default function Cloth() {
       </p>
       <h3>Controls</h3>
       <p>
-        Left click + drag to move cloth
+        Drag the cloth to move it around
         <br />
-        Scroll while dragging cloth to change depth
-        <br />
-        Space to pause/play
-        <br />
-        R to reset scene
-        <br />
-        WASD + EQ to move camera
-        <br />
-        Right click + drag to rotate camera
-        <br />
-        Hold shift to speed up camera movement
+        Scroll while dragging cloth to move it closer/farther
+        <br />R to reset simulation
       </p>
     </DemoTemplate>
   );
