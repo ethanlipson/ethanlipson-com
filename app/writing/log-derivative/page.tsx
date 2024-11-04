@@ -58,7 +58,7 @@ export default function Writing() {
         <Latex>$x$</Latex>, we want
       </p>
       <Latex>{`$$\\int_1^x t^{-1}\\mathrm dt = \\lim_{p \\to -1} \\int_1^x t^p\\mathrm dt$$`}</Latex>
-      <p>The expression on the right becomes</p>
+      <p>Applying the power rule, expression on the right becomes</p>
       <Latex>{`$$\\lim_{p \\to -1} \\frac{x^{p+1} - 1}{p+1}$$`}</Latex>
       <p>which, on a graph, actually looks pretty close to a logarithm!</p>
       <div className="flex justify-center">
@@ -85,13 +85,13 @@ export default function Writing() {
         interest!) If we make the substitution <Latex>$p = \frac1n$</Latex>, the
         above expression becomes
       </p>
-      <Latex>{`$$\\lim_{p \\to \\infty} \\left(1+xp\\right)^{\\frac1p}$$`}</Latex>
+      <Latex>{`$$\\lim_{p \\to 0} \\left(1+xp\\right)^{\\frac1p}$$`}</Latex>
       <p>
         Now, just as the defining relationship between <Latex>$e^x$</Latex> and{" "}
         <Latex>$\log$</Latex> is <Latex>$\log e^x = x$</Latex>, we can do the
         same for their limiting expressions:
       </p>
-      <Latex>{`$$\\lim_{p \\to \\infty} \\left(1 + \\frac{x^p - 1}pp\\right)^{\\frac1p} \\\\ = \\lim_{p \\to \\infty} \\left(1 + x^p - 1\\right)^{\\frac1p} \\\\ = \\lim_{p \\to \\infty} \\left(x^p\\right)^{\\frac1p} \\\\ = x$$`}</Latex>
+      <Latex>{`$$\\lim_{p \\to 0} \\left(1 + \\frac{x^p - 1}pp\\right)^{\\frac1p} \\\\ = \\lim_{p \\to 0} \\left(1 + x^p - 1\\right)^{\\frac1p} \\\\ = \\lim_{p \\to 0} \\left(x^p\\right)^{\\frac1p} \\\\ = x$$`}</Latex>
       <p>
         and as you can check for yourself, the same applies the other way
         around, just like <Latex>{`$e^{\\log x}$`}</Latex>. So it&apos;s not a
