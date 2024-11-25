@@ -26,13 +26,9 @@ export default function Home() {
         currently conducting research with Changxi Zheng on differentiable fluid
         simulation, with the goal of massively speeding up the design of
         vehicles with aero/hydrodynamic properties like airplanes, cars, and
-        submarines.
-      </p>
-      <p>
-        These demos are made possible by GPU parallelization, allowing
-        computations to be performed hundreds of times faster than usual.
-        It&apos;s what allows me to turn a passion for math into real, tangible
-        software.
+        submarines. This June, I&apos;ll be joining{" "}
+        <Link href="https://www.joinef.com/">Entrepreneur First</Link>&apos;s
+        summer 2025 cohort in San Francisco.
       </p>
       <p>
         I have beaten the most highly decorated International Math Olympiad gold
@@ -42,8 +38,16 @@ export default function Home() {
         You can view my resume <Link href="/resume.pdf">here</Link>.
       </p>
       <h1>My Work</h1>
-      <h5>Interactive Demos - Click to Try</h5>
-      <h6>Optimized for Desktop and iOS</h6>
+      <p>
+        These demos are made possible by GPU parallelization, allowing
+        computations to be performed hundreds of times faster than usual.
+        It&apos;s what allows me to turn a passion for math into real, tangible
+        software.
+      </p>
+      <div className="flex flex-col gap-2">
+        <h5>Interactive Demos - Click to Try</h5>
+        <h6>Optimized for Desktop and iOS</h6>
+      </div>
       <div className="flex flex-row justify-center">
         <div className="w-5/6 grid sm:grid-cols-4 sm:grid-rows-2 grid-cols-2 grid-rows-4 gap-x-[1%] gap-y-[2%] sm:gap-y-[4%] grid-flow-row sm:grid-flow-col">
           {videos.map((video, i) => (
