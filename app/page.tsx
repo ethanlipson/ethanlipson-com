@@ -26,7 +26,7 @@ export default function Home() {
         currently conducting research with Changxi Zheng on differentiable fluid
         simulation, with the goal of massively speeding up the design of
         vehicles with aero/hydrodynamic properties like airplanes, cars, and
-        submarines. This June, I&apos;ll be joining{" "}
+        submarines. This May, I&apos;ll be graduating and then joining{" "}
         <Link href="https://www.joinef.com/">Entrepreneur First</Link>&apos;s
         summer 2025 cohort in San Francisco.
       </p>
