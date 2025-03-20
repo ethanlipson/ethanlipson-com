@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <PageTemplate>
       <h1>Home</h1>
-      <p>
+      {/* <p>
         Hi, I&apos;m Ethan, a junior at Columbia studying Applied Math. I&apos;m
         currently conducting research with Changxi Zheng on differentiable fluid
         simulation, with the goal of massively speeding up the design of
@@ -29,6 +29,11 @@ export default function Home() {
         submarines. This May, I&apos;ll be graduating and then joining{" "}
         <Link href="https://www.joinef.com/">Entrepreneur First</Link>&apos;s
         summer 2025 cohort in San Francisco.
+      </p> */}
+      <p>
+        Hi, I&apos;m Ethan, a junior at Columbia studying Applied Math. My main
+        interest is in low-level GPU programming, particularly for physics
+        simulation. I also enjoy graphics programming, which is where I began.
       </p>
       <p>
         I have beaten the most highly decorated International Math Olympiad gold
