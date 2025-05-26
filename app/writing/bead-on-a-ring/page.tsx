@@ -36,7 +36,7 @@ export default function Writing() {
         <Image
           src={problemStatementUnlabeled}
           alt="problem-statement-unlabeled"
-          className="w-1/3 min-w-72"
+          className="w-72"
         />
       </div>
       <p>
@@ -69,7 +69,7 @@ export default function Writing() {
         <Image
           src={problemStatementLabeled}
           alt="problem-statement-labeled"
-          className="w-1/3 min-w-72"
+          className="w-72"
         />
       </div>
       Here we have
@@ -144,13 +144,13 @@ export default function Writing() {
       </p>
       <div className="flex justify-center text-center gap-4">
         <div className="flex-col items-center">
-          <video className="w-72" autoPlay loop muted>
+          <video className="w-72" autoPlay playsInline loop muted>
             <source src="/media/writing/bead-on-a-ring/omega_0.mp4" />
           </video>
           <Latex>$\omega = 0$</Latex>
         </div>
         <div className="flex-col items-center">
-          <video className="w-72" autoPlay loop muted>
+          <video className="w-72" autoPlay playsInline loop muted>
             <source src="/media/writing/bead-on-a-ring/omega_3.mp4" />
           </video>
           <Latex>$\omega = 3$</Latex>
@@ -158,13 +158,13 @@ export default function Writing() {
       </div>
       <div className="flex justify-center text-center gap-4">
         <div className="flex-col items-center">
-          <video className="w-72" autoPlay loop muted>
+          <video className="w-72" autoPlay playsInline loop muted>
             <source src="/media/writing/bead-on-a-ring/omega_4.mp4" />
           </video>
           <Latex>$\omega = 4$</Latex>
         </div>
         <div className="flex-col items-center">
-          <video className="w-72" autoPlay loop muted>
+          <video className="w-72" autoPlay playsInline loop muted>
             <source src="/media/writing/bead-on-a-ring/omega_8.mp4" />
           </video>
           <Latex>$\omega = 8$</Latex>
@@ -212,7 +212,7 @@ export default function Writing() {
         as we vary <Latex>$\omega$</Latex>.
       </p>
       <div className="flex justify-center">
-        <video className="w-[30rem]" autoPlay loop muted>
+        <video className="w-[30rem]" autoPlay playsInline loop muted>
           <source src="/media/writing/bead-on-a-ring/bifurcation.mp4" />
         </video>
       </div>
@@ -348,10 +348,10 @@ export default function Writing() {
       </p>
       <div className="flex justify-center">
         <div className="flex flex-col">
-          <video className="w-[30rem]" autoPlay loop muted>
+          <video className="w-[30rem]" autoPlay playsInline loop muted>
             <source src="/media/writing/bead-on-a-ring/energy-valley.mp4" />
           </video>
-          <video className="w-[30rem]" autoPlay loop muted>
+          <video className="w-[30rem]" autoPlay playsInline loop muted>
             <source src="/media/writing/bead-on-a-ring/energy-hump.mp4" />
           </video>
         </div>
