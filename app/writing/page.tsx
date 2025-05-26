@@ -9,6 +9,13 @@ export default function Writing() {
     <PageTemplate highlightWriting>
       <h1>Writing</h1>
       <p>
+        May 25, 2025
+        <br />
+        <Link href="/writing/bead-on-a-ring">
+          <b>Worked Example: Bead on a Ring</b>
+        </Link>
+      </p>
+      <p>
         October 30, 2024
         <br />
         <Link href="/writing/log-derivative">
