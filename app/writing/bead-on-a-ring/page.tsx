@@ -390,13 +390,13 @@ export default function Writing() {
       </p>
       <div className="flex justify-center text-center">
         <div className="flex-col items-center">
-          <video className="w-72" autoPlay loop muted>
+          <video className="w-72" autoPlay playsInline loop muted>
             <source src="/media/writing/bead-on-a-ring/below-separatrix.mp4" />
           </video>
           <Latex>$\dot\theta = 2\sqrt\frac gR - 0.01$</Latex>
         </div>
         <div className="flex-col items-center">
-          <video className="w-72" autoPlay loop muted>
+          <video className="w-72" autoPlay playsInline loop muted>
             <source src="/media/writing/bead-on-a-ring/above-separatrix.mp4" />
           </video>
           <Latex>$\dot\theta = 2\sqrt\frac gR + 0.01$</Latex>
