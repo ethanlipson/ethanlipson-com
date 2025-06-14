@@ -24,7 +24,7 @@ export default function Writing() {
       <p>
         I recently worked through a problem that incorporated aspects of
         analytical mechanics and dynamical systems. Since it&apos;s such a great
-        showcase of both techniques, I deicded to share it here. The problem is
+        showcase of both techniques, I decided to share it here. The problem is
         simple:
       </p>
       <p className="italic">
